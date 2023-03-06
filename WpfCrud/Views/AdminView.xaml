@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="WpfCrud.Views.AdminView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewmodels="clr-namespace:WpfCrud.ViewModels"
+             xmlns:views="clr-namespace:WpfCrud.Views"
+             d:DataContext="{d:DesignInstance Type=viewmodels:AdminViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             d:Background="White">
+    <TabControl>
+        <TabItem Header="Пользователи">
+            <views:UserAccountListingCrudView
+                DataContext="{Binding UserAccountListingCrudViewModel}"
+                Margin="10"/>
+        </TabItem>
+
+        <TabItem Header="Продукты">
+            <views:ProductListingCrudView 
+                DataContext="{Binding ProductListingCrudViewModel}"
+                Margin="10"/>
+        </TabItem>
+
+        <TabItem Header="Типы блюд">
+            <views:DishTypeListingCrudView 
+                DataContext="{Binding DishTypeListingCrudViewModel}"
+                Margin="10"/>
+        </TabItem>
+        
+        <TabItem Header="Блюда">
+            <views:DishListingCrudView 
+                DataContext="{Binding DishListingCrudViewModel}"
+                Margin="10"/>
+        </TabItem>
+        
+        <TabItem Header="Ингредиенты блюд">
+            <views:DishIngredientListingCrudView 
+                DataContext="{Binding DishIngredientListingCrudViewModel}"
+                Margin="10"/>
+        </TabItem>
+
+        <TabItem Header="Приготовления">
+            <views:DishCookingListingCrudView 
+                DataContext="{Binding DishCookingListingCrudViewModel}"
+                Margin="10"/>
+        </TabItem>
+    </TabControl>
+</UserControl>

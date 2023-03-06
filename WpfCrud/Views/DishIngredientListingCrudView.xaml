@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="WpfCrud.Views.DishIngredientListingCrudView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewmodels="clr-namespace:WpfCrud.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:DishIngredientListingCrudViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="0">
+            <Button Content="Загрузить"
+                    Command="{Binding LoadDishIngredientsCommand}"/>
+            <Button Content="Добавить"
+                    Command="{Binding AddDishIngredientCommand}"
+                    Margin="20 0 0 0"/>
+            <Button Content="Изменить"
+                    Command="{Binding EditDishIngredientCommand}"
+                    Margin="20 0 0 0"/>
+            <Button Content="Удалить"
+                    Command="{Binding DeleteDishIngredientCommand}"
+                    Margin="20 0 0 0"/>
+        </StackPanel>
+
+        <DataGrid ItemsSource="{Binding DishIngredients}"
+                  Margin="0 20 0 0"
+                  Grid.Row="1"
+                  IsReadOnly="True"
+                  AutoGenerateColumns="False"
+                  SelectedItem="{Binding SelectedDishIngredient}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id блюда"
+                                    Binding="{Binding DishId}"/>
+                <DataGridTextColumn Header="Наименование блюда"
+                                    Binding="{Binding DishName}"/>
+                <DataGridTextColumn Header="Id продукта"
+                                    Binding="{Binding ProductId}"/>
+                <DataGridTextColumn Header="Требуемая масса продукта (г)"
+                                    Binding="{Binding RequiredWeightGrams}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>
