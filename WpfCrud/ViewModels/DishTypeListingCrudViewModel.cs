@@ -14,7 +14,6 @@ namespace WpfCrud.ViewModels
     public class DishTypeListingCrudViewModel : ViewModelBase
     {
         private readonly DishTypeService _dishTypeService = new DishTypeService();
-        private readonly EditEntityWindowDialogService _editEntityWindowDialogService = new EditEntityWindowDialogService();
         private readonly ObservableCollection<DishType> _dishTypes = new ObservableCollection<DishType>();
         private DishType _selectedDishType;
 
@@ -62,37 +61,39 @@ namespace WpfCrud.ViewModels
 
         private async Task EditDishTypeAsync()
         {
-            if (SelectedDishType is null)
-            {
-                return;
-            }
+            throw new NotImplementedException();
+            //if (SelectedDishType is null)
+            //{
+            //    return;
+            //}
 
-            var editDishType = new DishType
-            {
-                Id = SelectedDishType.Id,
-                Name = SelectedDishType.Name,
-            };
+            //var editDishType = new DishType
+            //{
+            //    Id = SelectedDishType.Id,
+            //    Name = SelectedDishType.Name,
+            //};
 
-            var editableDishTypeViewModel = new EditableDishTypeViewModel(editDishType);
-            var dialogResult = _editEntityWindowDialogService.ShowDialog(editableDishTypeViewModel);
-            if (dialogResult != true)
-            {
-                return;
-            }
-            await _dishTypeService.UpdateDishTypeAsync(editDishType);
+            //var editableDishTypeViewModel = new EditableDishTypeViewModel(editDishType);
+            //var dialogResult = _editEntityWindowDialogService.ShowDialog(editableDishTypeViewModel);
+            //if (dialogResult != true)
+            //{
+            //    return;
+            //}
+            //await _dishTypeService.UpdateDishTypeAsync(editDishType);
         }
 
         private async Task AddDishTypeAsync()
         {
-            var editDishType = new DishType();
-            var editableDishTypeViewModel = new EditableDishTypeViewModel(editDishType);
-            var dialogResult = _editEntityWindowDialogService.ShowDialog(editableDishTypeViewModel);
-            if (dialogResult != true)
-            {
-                return;
-            }
-            _ = await _dishTypeService.AddDishTypeAsync(editDishType);
-            await LoadDishTypesAsync();
+            throw new NotImplementedException();
+            //var editDishType = new DishType();
+            //var editableDishTypeViewModel = new EditableDishTypeViewModel(editDishType);
+            //var dialogResult = _editEntityWindowDialogService.ShowDialog(editableDishTypeViewModel);
+            //if (dialogResult != true)
+            //{
+            //    return;
+            //}
+            //_ = await _dishTypeService.AddDishTypeAsync(editDishType);
+            //await LoadDishTypesAsync();
         }
 
         private void HandleException(Exception e)
@@ -109,13 +110,6 @@ namespace WpfCrud.ViewModels
                 _dishTypes.Add(dt);
             }
         }
-
-        public DishTypeListingCrudViewModel(DishTypeService dishTypeService, EditEntityWindowDialogService editEntityWindowDialogService) : this()
-        {
-            _dishTypeService = dishTypeService ?? throw new System.ArgumentNullException(nameof(dishTypeService));
-            _editEntityWindowDialogService = editEntityWindowDialogService ?? throw new System.ArgumentNullException(nameof(editEntityWindowDialogService));
-        }
-
 
     }
 }

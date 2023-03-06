@@ -64,22 +64,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="EditEntityWindow.xaml.cs">
-      <DependentUpon>EditEntityWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Dish.cs" />
-    <Compile Include="Models\DishType.cs" />
-    <Compile Include="Models\Product.cs" />
-    <Compile Include="Services\Authorization\AuthorizationService.cs" />
-    <Compile Include="Services\Dishes\DishService.cs" />
-    <Compile Include="Services\DishTypes\DishTypeService.cs" />
-    <Compile Include="Services\EditEntityWindowDialogService.cs" />
-    <Compile Include="Services\Products\ProductService.cs" />
-    <Compile Include="ViewModels\ChefViewModel.cs" />
-    <Compile Include="Commands\AsyncCommandBase.cs" />
-    <Compile Include="Commands\AsyncDelegateCommand.cs" />
-    <Compile Include="Commands\CommandBase.cs" />
-    <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="DbModels\Dish.cs">
       <DependentUpon>FoodServiceDbModel.tt</DependentUpon>
     </Compile>
@@ -92,6 +76,34 @@
     <Compile Include="DbModels\DishType.cs">
       <DependentUpon>FoodServiceDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DbModels\Product.cs">
+      <DependentUpon>FoodServiceDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbModels\UserAccount.cs">
+      <DependentUpon>FoodServiceDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbModels\UserRole.cs">
+      <DependentUpon>FoodServiceDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbModels\ViewDish.cs">
+      <DependentUpon>FoodServiceDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EditDishWindow.xaml.cs">
+      <DependentUpon>EditDishWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewDish.cs" />
+    <Compile Include="Models\DishType.cs" />
+    <Compile Include="Models\EditableDish.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Services\Authorization\AuthorizationService.cs" />
+    <Compile Include="Services\Dishes\DishService.cs" />
+    <Compile Include="Services\DishTypes\DishTypeService.cs" />
+    <Compile Include="Services\Products\ProductService.cs" />
+    <Compile Include="ViewModels\ChefViewModel.cs" />
+    <Compile Include="Commands\AsyncCommandBase.cs" />
+    <Compile Include="Commands\AsyncDelegateCommand.cs" />
+    <Compile Include="Commands\CommandBase.cs" />
+    <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="DbModels\FoodServiceDbModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -107,15 +119,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FoodServiceDbModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="DbModels\Product.cs">
-      <DependentUpon>FoodServiceDbModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DbModels\UserAccount.cs">
-      <DependentUpon>FoodServiceDbModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DbModels\UserRole.cs">
-      <DependentUpon>FoodServiceDbModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
@@ -126,13 +129,7 @@
     <Compile Include="ViewModels\DishIngredientListingCrudViewModel.cs" />
     <Compile Include="ViewModels\DishListingCrudViewModel.cs" />
     <Compile Include="ViewModels\DishTypeListingCrudViewModel.cs" />
-    <Compile Include="ViewModels\EditableDishCookingViewModel.cs" />
-    <Compile Include="ViewModels\EditableDishIngredientViewModel.cs" />
-    <Compile Include="ViewModels\EditableDishTypeViewModel.cs" />
-    <Compile Include="ViewModels\EditableDishViewModel.cs" />
-    <Compile Include="ViewModels\EditableProductViewModel.cs" />
     <Compile Include="ViewModels\EditableUserAccountViewModel.cs" />
-    <Compile Include="ViewModels\EditEntityViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ProductListingCrudViewModel.cs" />
@@ -160,31 +157,13 @@
     <Compile Include="Views\DishTypeListingCrudView.xaml.cs">
       <DependentUpon>DishTypeListingCrudView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\EditableDishCookingView.xaml.cs">
-      <DependentUpon>EditableDishCookingView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\EditableDishIngredientView.xaml.cs">
-      <DependentUpon>EditableDishIngredientView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\EditableDishTypeView.xaml.cs">
-      <DependentUpon>EditableDishTypeView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\EditableDishView.xaml.cs">
-      <DependentUpon>EditableDishView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\EditableProductView.xaml.cs">
-      <DependentUpon>EditableProductView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\EditableUserAccountView.xaml.cs">
-      <DependentUpon>EditableUserAccountView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\ProductListingCrudView.xaml.cs">
       <DependentUpon>ProductListingCrudView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserAccountListingCrudView.xaml.cs">
       <DependentUpon>UserAccountListingCrudView.xaml</DependentUpon>
     </Compile>
-    <Page Include="EditEntityWindow.xaml">
+    <Page Include="EditDishWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -229,30 +208,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DishTypeListingCrudView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\EditableDishCookingView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\EditableDishIngredientView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\EditableDishTypeView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\EditableDishView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\EditableProductView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\EditableUserAccountView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

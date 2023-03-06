@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfCrud.Views
+namespace WpfCrud
 {
     /// <summary>
-    /// Логика взаимодействия для EditableDishCookingView.xaml
+    /// Логика взаимодействия для EditDishWindow.xaml
     /// </summary>
-    public partial class EditableDishCookingView : UserControl
+    public partial class EditDishWindow : Window
     {
-        public EditableDishCookingView()
+        public EditDishWindow()
         {
             InitializeComponent();
         }

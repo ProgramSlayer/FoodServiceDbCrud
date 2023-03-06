@@ -1,6 +1,6 @@
 ﻿namespace WpfCrud.Models
 {
-    public class Dish
+    public class EditableDish
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -9,6 +9,5 @@
         public double WeightGrams { get; set; }
         public string Recipe { get; set; }
         public byte[] Image { get; set; }
-        public double CaloricContentPer100Grams { get; set; }
     }
 }

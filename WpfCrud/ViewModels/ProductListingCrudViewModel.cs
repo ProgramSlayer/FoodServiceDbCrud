@@ -13,7 +13,6 @@ namespace WpfCrud.ViewModels
     public class ProductListingCrudViewModel : ViewModelBase
     {
         private readonly ProductService _productService = new ProductService();
-        private readonly EditEntityWindowDialogService _editEntityWindowDialogService = new EditEntityWindowDialogService();
         private readonly ObservableCollection<Product> _products = new ObservableCollection<Product>();
 
         private Product _selectedProduct;
@@ -55,42 +54,44 @@ namespace WpfCrud.ViewModels
 
         private async Task EditProductAsync()
         {
-            if (SelectedProduct is null)
-            {
-                return;
-            }
+            throw new NotImplementedException();
+            //if (SelectedProduct is null)
+            //{
+            //    return;
+            //}
 
-            var editProduct = new Product
-            {
-                Id = SelectedProduct.Id,
-                CaloricContentPer100Grams = SelectedProduct.CaloricContentPer100Grams,
-                Name = SelectedProduct.Name,
-                PricePerKilogramRoubles = SelectedProduct.PricePerKilogramRoubles,
-                WeightGrams = SelectedProduct.WeightGrams,
-            };
+            //var editProduct = new Product
+            //{
+            //    Id = SelectedProduct.Id,
+            //    CaloricContentPer100Grams = SelectedProduct.CaloricContentPer100Grams,
+            //    Name = SelectedProduct.Name,
+            //    PricePerKilogramRoubles = SelectedProduct.PricePerKilogramRoubles,
+            //    WeightGrams = SelectedProduct.WeightGrams,
+            //};
 
-            var editableProductViewModel = new EditableProductViewModel(editProduct);
-            var dialogResult = _editEntityWindowDialogService.ShowDialog(editableProductViewModel);
-            if (dialogResult != true)
-            {
-                return;
-            }
-            await _productService.UpdateProductAsync(editProduct);
-            var index = _products.IndexOf(SelectedProduct);
-            await LoadProductsAsync();
+            //var editableProductViewModel = new EditableProductViewModel(editProduct);
+            //var dialogResult = _editEntityWindowDialogService.ShowDialog(editableProductViewModel);
+            //if (dialogResult != true)
+            //{
+            //    return;
+            //}
+            //await _productService.UpdateProductAsync(editProduct);
+            //var index = _products.IndexOf(SelectedProduct);
+            //await LoadProductsAsync();
         }
 
         private async Task AddProductAsync()
         {
-            var product = new Product();
-            var editableProductViewModel = new EditableProductViewModel(product);
-            bool? dialogResult = _editEntityWindowDialogService.ShowDialog(editableProductViewModel);
-            if (dialogResult != true)
-            {
-                return;
-            }
-            _ = await _productService.AddProductAsync(product);
-            await LoadProductsAsync();
+            throw new NotImplementedException();
+            //var product = new Product();
+            //var editableProductViewModel = new EditableProductViewModel(product);
+            //bool? dialogResult = _editEntityWindowDialogService.ShowDialog(editableProductViewModel);
+            //if (dialogResult != true)
+            //{
+            //    return;
+            //}
+            //_ = await _productService.AddProductAsync(product);
+            //await LoadProductsAsync();
         }
 
         private void HandleException(Exception obj)
@@ -112,12 +113,5 @@ namespace WpfCrud.ViewModels
             }
         }
 
-        public ProductListingCrudViewModel(
-            ProductService productService,
-            EditEntityWindowDialogService editEntityWindowDialogService) : this()
-        {
-            _productService = productService ?? throw new ArgumentNullException(nameof(productService));
-            _editEntityWindowDialogService = editEntityWindowDialogService ?? throw new ArgumentNullException(nameof(editEntityWindowDialogService));
-        }
     }
 }

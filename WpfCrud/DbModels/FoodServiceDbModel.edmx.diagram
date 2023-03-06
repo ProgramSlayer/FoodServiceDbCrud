@@ -17,6 +17,7 @@
         <AssociationConnector Association="FoodServiceDbModel.FK__DishIngre__DishI__48CFD27E" ManuallyRouted="false" />
         <AssociationConnector Association="FoodServiceDbModel.FK__DishIngre__Produ__49C3F6B7" ManuallyRouted="false" />
         <AssociationConnector Association="FoodServiceDbModel.FK__UserAccou__UserR__5812160E" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="FoodServiceDbModel.ViewDish" Width="1.5" PointX="7.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

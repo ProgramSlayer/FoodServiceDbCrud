@@ -40,15 +40,17 @@
                 <DataGridTextColumn Header="Наименование"
                                     Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Тип"
-                                    Binding="{Binding DishType.Name}"/>
+                                    Binding="{Binding DishTypeName}"/>
                 <DataGridTextColumn Header="Время приготовления (минут)"
                                     Binding="{Binding CookingTimeMinutes}"/>
                 <DataGridTextColumn Header="Масса готового блюда (г)"
                                     Binding="{Binding WeightGrams}"/>
-                <DataGridTextColumn Header="Рецепт"
-                                    Binding="{Binding Recipe}"/>
                 <DataGridTextColumn Header="Калорийность (ккал / 100 г)"
                                     Binding="{Binding CaloricContentPer100Grams}"/>
+                <DataGridTextColumn Header="Цена блюда (руб.)"
+                                    Binding="{Binding DishPriceRoubles}"/>
+                <DataGridTextColumn Header="Рецепт"
+                                    Binding="{Binding Recipe}"/>
                 <DataGridTemplateColumn Header="Изображение">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

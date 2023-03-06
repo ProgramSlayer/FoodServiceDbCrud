@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище FoodServiceDbModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище FoodServiceDbModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Dish">
           <Key>
             <PropertyRef Name="Id" />
@@ -68,6 +68,29 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "FoodService.dbo.ViewDish" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="ViewDish">
+          <Key>
+            <PropertyRef Name="DishId" />
+            <PropertyRef Name="DishName" />
+            <PropertyRef Name="DishTypeId" />
+            <PropertyRef Name="DishTypeName" />
+            <PropertyRef Name="DishCookingTimeMinutes" />
+            <PropertyRef Name="DishWeightGrams" />
+            <PropertyRef Name="DishRecipe" />
+          </Key>
+          <Property Name="DishId" Type="int" Nullable="false" />
+          <Property Name="DishName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DishTypeId" Type="int" Nullable="false" />
+          <Property Name="DishTypeName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DishCookingTimeMinutes" Type="float" Nullable="false" />
+          <Property Name="DishWeightGrams" Type="float" Nullable="false" />
+          <Property Name="DishCaloricContentPer100Grams" Type="float" />
+          <Property Name="DishPriceRoubles" Type="float" />
+          <Property Name="DishRecipe" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DishImage" Type="varbinary(max)" />
         </EntityType>
         <Association Name="FK__Dish__DishTypeId__4316F928">
           <End Role="DishType" Type="Self.DishType" Multiplicity="1" />
@@ -137,6 +160,20 @@
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserAccount" EntityType="Self.UserAccount" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ViewDish" EntityType="Self.ViewDish" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ViewDish].[DishId] AS [DishId], 
+    [ViewDish].[DishName] AS [DishName], 
+    [ViewDish].[DishTypeId] AS [DishTypeId], 
+    [ViewDish].[DishTypeName] AS [DishTypeName], 
+    [ViewDish].[DishCookingTimeMinutes] AS [DishCookingTimeMinutes], 
+    [ViewDish].[DishWeightGrams] AS [DishWeightGrams], 
+    [ViewDish].[DishCaloricContentPer100Grams] AS [DishCaloricContentPer100Grams], 
+    [ViewDish].[DishPriceRoubles] AS [DishPriceRoubles], 
+    [ViewDish].[DishRecipe] AS [DishRecipe], 
+    [ViewDish].[DishImage] AS [DishImage]
+    FROM [dbo].[ViewDish] AS [ViewDish]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK__Dish__DishTypeId__4316F928" Association="Self.FK__Dish__DishTypeId__4316F928">
             <End Role="DishType" EntitySet="DishType" />
             <End Role="Dish" EntitySet="Dish" />
@@ -158,8 +195,7 @@
             <End Role="UserAccount" EntitySet="UserAccount" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FoodServiceDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -325,7 +361,29 @@
             <End Role="UserRole" EntitySet="UserRoles" />
             <End Role="UserAccount" EntitySet="UserAccounts" />
           </AssociationSet>
+          <EntitySet Name="ViewDishes" EntityType="FoodServiceDbModel.ViewDish" />
         </EntityContainer>
+        <EntityType Name="ViewDish">
+          <Key>
+            <PropertyRef Name="DishId" />
+            <PropertyRef Name="DishName" />
+            <PropertyRef Name="DishTypeName" />
+            <PropertyRef Name="DishCookingTimeMinutes" />
+            <PropertyRef Name="DishWeightGrams" />
+            <PropertyRef Name="DishRecipe" />
+            <PropertyRef Name="DishTypeId" />
+          </Key>
+          <Property Name="DishId" Type="Int32" Nullable="false" />
+          <Property Name="DishName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DishTypeName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DishCookingTimeMinutes" Type="Double" Nullable="false" />
+          <Property Name="DishWeightGrams" Type="Double" Nullable="false" />
+          <Property Name="DishCaloricContentPer100Grams" Type="Double" />
+          <Property Name="DishPriceRoubles" Type="Double" />
+          <Property Name="DishRecipe" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DishImage" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="DishTypeId" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -399,6 +457,22 @@
               <MappingFragment StoreEntitySet="UserRole">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViewDishes">
+            <EntityTypeMapping TypeName="FoodServiceDbModel.ViewDish">
+              <MappingFragment StoreEntitySet="ViewDish">
+                <ScalarProperty Name="DishTypeId" ColumnName="DishTypeId" />
+                <ScalarProperty Name="DishImage" ColumnName="DishImage" />
+                <ScalarProperty Name="DishRecipe" ColumnName="DishRecipe" />
+                <ScalarProperty Name="DishPriceRoubles" ColumnName="DishPriceRoubles" />
+                <ScalarProperty Name="DishCaloricContentPer100Grams" ColumnName="DishCaloricContentPer100Grams" />
+                <ScalarProperty Name="DishWeightGrams" ColumnName="DishWeightGrams" />
+                <ScalarProperty Name="DishCookingTimeMinutes" ColumnName="DishCookingTimeMinutes" />
+                <ScalarProperty Name="DishTypeName" ColumnName="DishTypeName" />
+                <ScalarProperty Name="DishName" ColumnName="DishName" />
+                <ScalarProperty Name="DishId" ColumnName="DishId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
