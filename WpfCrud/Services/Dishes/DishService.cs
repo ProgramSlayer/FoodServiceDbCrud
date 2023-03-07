@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data.Entity;
+using WpfCrud.Models;
 
 namespace WpfCrud.Services.Dishes
 {
@@ -43,89 +44,84 @@ namespace WpfCrud.Services.Dishes
             }
         }
 
-        //public async Task<DishInfo> AddDishAsync(DishInfo dish)
-        //{
-        //    if (dish == null)
-        //    {
-        //        throw new ArgumentNullException(nameof(dish));
-        //    }
+        public async Task<EditableDish> AddDishAsync(EditableDish dish)
+        {
+            if (dish is null)
+            {
+                throw new ArgumentNullException(nameof(dish));
+            }
 
-        //    using (var context = _factory())
-        //    {
-        //        var dbDish = await context.Dishes.SingleOrDefaultAsync(d => d.Name == dish.Name);
-        //        if (!(dbDish is null))
-        //        {
-        //            throw new Exception($"Блюдо (Name = {dish.Name}) уже есть в базе данных!");
-        //        }
-        //        dbDish = new DbDish
-        //        {
-        //            Name = dish.Name,
-        //            CookingTimeMinutes = dish.CookingTimeMinutes,
-        //            DishTypeId = dish.DishType.Id,
-        //            WeightGrams = dish.WeightGrams,
-        //            Image = dish.Image,
-        //            Recipe = dish.Recipe,
-        //        };
-        //        context.Dishes.Add(dbDish);
-        //        await context.SaveChangesAsync();
-        //        dish.Id = dbDish.Id;
-        //        dish.DishType.Name = dbDish.DishType.Name;
-        //        return dish;
-        //    }
-        //}
+            using (var context = _factory())
+            {
+                var alreadyInBase = await context.Dishes.AnyAsync(d => d.Id == dish.Id || d.Name == dish.Name);
+                if (alreadyInBase)
+                {
+                    throw new Exception($"Блюдо (Name = {dish.Name}) уже есть в базе данных!");
+                }
+                var dbDish = new DbDish
+                {
+                    Name = dish.Name,
+                    CookingTimeMinutes = dish.CookingTimeMinutes,
+                    DishTypeId = dish.DishType.Id,
+                    WeightGrams = dish.WeightGrams,
+                    Image = dish.Image,
+                    Recipe = dish.Recipe,
+                };
+                context.Dishes.Add(dbDish);
+                await context.SaveChangesAsync();
+                dish.Id = dbDish.Id;
+                return dish;
+            }
+        }
 
-        //public async Task UpdateDishAsync(DishInfo dish)
-        //{
-        //    if (dish == null)
-        //    {
-        //        throw new ArgumentNullException(nameof(dish));
-        //    }
+        public async Task UpdateDishAsync(EditableDish dish)
+        {
+            if (dish == null)
+            {
+                throw new ArgumentNullException(nameof(dish));
+            }
 
-        //    using (var context = _factory())
-        //    {
-        //        var dbDish = await context
-        //            .Dishes
-        //            .SingleOrDefaultAsync(d => d.Id == dish.Id) 
-        //            ?? throw new Exception($"Блюдо (Id = {dish.Id}) не найдено в базе данных!");
-        //        dbDish.Name = dish.Name;
-        //        dbDish.DishTypeId = dish.DishType.Id;
-        //        dbDish.CookingTimeMinutes = dish.CookingTimeMinutes;
-        //        dbDish.WeightGrams = dish.WeightGrams;
-        //        dbDish.Recipe = dish.Recipe;
-        //        dbDish.Image = dish.Image;
-        //        await context.SaveChangesAsync();
-        //    }
-        //}
+            using (var context = _factory())
+            {
+                var dbDish = await context
+                    .Dishes
+                    .SingleOrDefaultAsync(d => d.Id == dish.Id)
+                    ?? throw new Exception($"Блюдо (Id = {dish.Id}) не найдено в базе данных!");
+                dbDish.Name = dish.Name;
+                dbDish.DishTypeId = dish.DishType.Id;
+                dbDish.CookingTimeMinutes = dish.CookingTimeMinutes;
+                dbDish.WeightGrams = dish.WeightGrams;
+                dbDish.Recipe = dish.Recipe;
+                dbDish.Image = dish.Image;
+                await context.SaveChangesAsync();
+            }
+        }
 
-        //public async Task DeleteDishAsync(int id)
-        //{
-        //    using (var context = _factory())
-        //    {
-        //        var dbDish = await context
-        //            .Dishes
-        //            .SingleOrDefaultAsync(d => d.Id == id)
-        //            ?? throw new Exception($"Блюдо (Id = {id}) не найдено в базе данных!");
-        //        var dishIngredientCount = await context
-        //            .Entry(dbDish)
-        //            .Collection(d => d.DishIngredients)
-        //            .Query()
-        //            .CountAsync();
-        //        var dishCookingCount = await context
-        //            .Entry(dbDish)
-        //            .Collection(d => d.DishCookings)
-        //            .Query()
-        //            .CountAsync();
-        //        if (dishIngredientCount != 0)
-        //        {
-        //            throw new Exception($"Нельзя удалить блюдо (Id = {id}) из-за наличия связанных записей в таблице ингредиентов!");
-        //        }
-        //        if (dishCookingCount != 0)
-        //        {
-        //            throw new Exception($"Нельзя удалить блюдо (Id = {id}) из-за наличия записей в таблице приготовлений!");
-        //        }
-        //        context.Dishes.Remove(dbDish);
-        //        await context.SaveChangesAsync();
-        //    }
-        //}
+        public async Task DeleteDishAsync(int id)
+        {
+            using (var context = _factory())
+            {
+                var dbDish = await context
+                    .Dishes
+                    .SingleOrDefaultAsync(d => d.Id == id)
+                    ?? throw new Exception($"Блюдо (Id = {id}) не найдено в базе данных!");
+                var hasDishIngredients = await context.Entry(dbDish).Collection(d => d.DishIngredients).Query().AnyAsync();
+
+                if (hasDishIngredients)
+                {
+                    throw new Exception($"Нельзя удалить блюдо (Id = {id}) из-за наличия связанных записей в таблице ингредиентов!");
+                }
+                
+                var hasDishCookings = await context.Entry(dbDish).Collection(d => d.DishCookings).Query().AnyAsync();
+
+                if (hasDishCookings)
+                {
+                    throw new Exception($"Нельзя удалить блюдо (Id = {id}) из-за наличия записей в таблице приготовлений!");
+                }
+                
+                context.Dishes.Remove(dbDish);
+                await context.SaveChangesAsync();
+            }
+        }
     }
 }

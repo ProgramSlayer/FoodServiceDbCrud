@@ -5,7 +5,6 @@ using System.Windows;
 using System.Windows.Input;
 using WpfCrud.Commands;
 using WpfCrud.Models;
-using WpfCrud.Services;
 using WpfCrud.Services.Products;
 
 namespace WpfCrud.ViewModels
@@ -13,16 +12,16 @@ namespace WpfCrud.ViewModels
     public class ProductListingCrudViewModel : ViewModelBase
     {
         private readonly ProductService _productService = new ProductService();
-        private readonly ObservableCollection<Product> _products = new ObservableCollection<Product>();
+        private readonly ObservableCollection<ViewProduct> _products = new ObservableCollection<ViewProduct>();
 
-        private Product _selectedProduct;
+        private ViewProduct _selectedProduct;
 
-        public ReadOnlyObservableCollection<Product> Products { get; }
+        public ReadOnlyObservableCollection<ViewProduct> Products { get; }
         public ICommand LoadProductsCommand { get; }
         public ICommand AddProductCommand { get; }
         public ICommand EditProductCommand { get; }
         public ICommand DeleteProductCommand { get; }
-        public Product SelectedProduct
+        public ViewProduct SelectedProduct
         {
             get => _selectedProduct; 
             set
@@ -34,7 +33,7 @@ namespace WpfCrud.ViewModels
 
         public ProductListingCrudViewModel()
         {
-            Products = new ReadOnlyObservableCollection<Product>(_products);
+            Products = new ReadOnlyObservableCollection<ViewProduct>(_products);
             LoadProductsCommand = new AsyncDelegateCommand(LoadProductsAsync, HandleException);
             AddProductCommand = new AsyncDelegateCommand(AddProductAsync, HandleException);
             EditProductCommand = new AsyncDelegateCommand(EditProductAsync, HandleException);
@@ -52,46 +51,52 @@ namespace WpfCrud.ViewModels
             await LoadProductsAsync();
         }
 
+        private bool? EditProductWindowShowDialog(EditableProduct product)
+        {
+            if (product is null)
+            {
+                throw new ArgumentNullException(nameof(product));
+            }
+
+            var editProductViewModel = new EditProductViewModel(product);
+            var editProductWindow = new EditProductWindow(editProductViewModel);
+            var result = editProductWindow.ShowDialog();
+            return result;
+        }
+
         private async Task EditProductAsync()
         {
-            throw new NotImplementedException();
-            //if (SelectedProduct is null)
-            //{
-            //    return;
-            //}
+            if (SelectedProduct is null)
+            {
+                return;
+            }
 
-            //var editProduct = new Product
-            //{
-            //    Id = SelectedProduct.Id,
-            //    CaloricContentPer100Grams = SelectedProduct.CaloricContentPer100Grams,
-            //    Name = SelectedProduct.Name,
-            //    PricePerKilogramRoubles = SelectedProduct.PricePerKilogramRoubles,
-            //    WeightGrams = SelectedProduct.WeightGrams,
-            //};
+            var product = new EditableProduct(
+                SelectedProduct.Id,
+                SelectedProduct.Name,
+                SelectedProduct.CaloricContentPer100Grams,
+                SelectedProduct.WeightGrams,
+                SelectedProduct.PricePerKilogramRoubles);
 
-            //var editableProductViewModel = new EditableProductViewModel(editProduct);
-            //var dialogResult = _editEntityWindowDialogService.ShowDialog(editableProductViewModel);
-            //if (dialogResult != true)
-            //{
-            //    return;
-            //}
-            //await _productService.UpdateProductAsync(editProduct);
-            //var index = _products.IndexOf(SelectedProduct);
-            //await LoadProductsAsync();
+            var dialogResult = EditProductWindowShowDialog(product);
+            if (dialogResult != true)
+            {
+                return;
+            }
+            await _productService.UpdateProductAsync(product);
+            await LoadProductsAsync();
         }
 
         private async Task AddProductAsync()
         {
-            throw new NotImplementedException();
-            //var product = new Product();
-            //var editableProductViewModel = new EditableProductViewModel(product);
-            //bool? dialogResult = _editEntityWindowDialogService.ShowDialog(editableProductViewModel);
-            //if (dialogResult != true)
-            //{
-            //    return;
-            //}
-            //_ = await _productService.AddProductAsync(product);
-            //await LoadProductsAsync();
+            var product = new EditableProduct();
+            var dialogResult = EditProductWindowShowDialog(product);
+            if (dialogResult != true)
+            {
+                return;
+            }
+            _ = await _productService.AddProductAsync(product);
+            await LoadProductsAsync();
         }
 
         private void HandleException(Exception obj)
@@ -105,7 +110,7 @@ namespace WpfCrud.ViewModels
 
         private async Task LoadProductsAsync()
         {
-            var products = await _productService.GetProductsAsync();
+            var products = await _productService.GetViewProductsAsync();
             _products.Clear();
             foreach (var p in products)
             {

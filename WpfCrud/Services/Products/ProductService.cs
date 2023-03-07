@@ -4,8 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using WpfCrud.DbModels;
-using DbProduct = WpfCrud.DbModels.Product;
-using Product = WpfCrud.Models.Product;
+using WpfCrud.Models;
 
 namespace WpfCrud.Services.Products
 {
@@ -22,25 +21,23 @@ namespace WpfCrud.Services.Products
             _factory = factory;
         }
 
-        public async Task<IEnumerable<Product>> GetProductsAsync()
+        public async Task<IEnumerable<ViewProduct>> GetViewProductsAsync()
         {
             using (var context = _factory())
             {
                 var dbProducts = await context.Products.ToListAsync();
                 var products = from dbp in dbProducts
-                               select new Product
-                               {
-                                   Id = dbp.Id,
-                                   Name = dbp.Name,
-                                   CaloricContentPer100Grams = dbp.CaloricContentPer100Grams,
-                                   PricePerKilogramRoubles = dbp.PricePerKilogramRoubles,
-                                   WeightGrams = dbp.WeightGrams,
-                               };
+                               select new ViewProduct(
+                                   dbp.Id,
+                                   dbp.Name,
+                                   dbp.CaloricContentPer100Grams,
+                                   dbp.WeightGrams,
+                                   dbp.PricePerKilogramRoubles);
                 return products;
             }
         }
 
-        public async Task<Product> AddProductAsync(Product product)
+        public async Task<EditableProduct> AddProductAsync(EditableProduct product)
         {
             if (product is null)
             {
@@ -55,7 +52,7 @@ namespace WpfCrud.Services.Products
                     throw new Exception("Продукт с таким наименованием уже есть в базе данных!");
                 }
 
-                dbProd = new DbProduct
+                dbProd = new Product
                 {
                     Name = product.Name,
                     CaloricContentPer100Grams = product.CaloricContentPer100Grams,
@@ -70,7 +67,7 @@ namespace WpfCrud.Services.Products
             }
         }
 
-        public async Task UpdateProductAsync(Product product)
+        public async Task UpdateProductAsync(EditableProduct product)
         {
             if (product == null)
             {
@@ -79,16 +76,12 @@ namespace WpfCrud.Services.Products
 
             using (var context = _factory())
             {
-                var dbProd = await context.Products.SingleOrDefaultAsync(p => p.Id == product.Id);
-                if (dbProd is null)
-                {
-                    throw new Exception($"Продукт (Id = {product.Id}) не найден в базе данных!");
-                }
-
+                var dbProd = await context.Products.SingleOrDefaultAsync(p => p.Id == product.Id)
+                    ?? throw new Exception($"Продукт (Id = {product.Id}) не найден в базе данных!");
                 dbProd.Name = product.Name;
                 dbProd.CaloricContentPer100Grams = product.CaloricContentPer100Grams;
                 dbProd.PricePerKilogramRoubles = product.PricePerKilogramRoubles;
-                dbProd.WeightGrams = dbProd.WeightGrams;
+                dbProd.WeightGrams = product.WeightGrams;
 
                 await context.SaveChangesAsync();
             }
@@ -98,12 +91,8 @@ namespace WpfCrud.Services.Products
         {
             using (var context = _factory())
             {
-                var dbProd = await context.Products.SingleOrDefaultAsync(p => p.Id == id);
-                if (dbProd is null)
-                {
-                    throw new Exception($"Продукт (Id = {id}) не найден в базе данных!");
-                }
-
+                var dbProd = await context.Products.SingleOrDefaultAsync(p => p.Id == id)
+                    ?? throw new Exception($"Продукт (Id = {id}) не найден в базе данных!");
                 context.Products.Remove(dbProd);
                 await context.SaveChangesAsync();
             }

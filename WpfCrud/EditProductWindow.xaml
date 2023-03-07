@@ -1,0 +1,48 @@
+﻿<Window x:Class="WpfCrud.EditProductWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewmodels="clr-namespace:WpfCrud.ViewModels"
+        d:DataContext="{d:DesignInstance Type=viewmodels:EditProductViewModel}"
+        mc:Ignorable="d"
+        Title="Редактирование продукта" Height="450" Width="800"
+        Closed="Window_Closed"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Orientation="Vertical" Margin="10"
+                    Grid.Row="0">
+            <TextBlock Text="Наименование"/>
+            <TextBox Text="{Binding Name}"/>
+
+            <TextBlock Text="Калорийность (ккал / 100 г)"
+                           Margin="0 10 0 0"/>
+            <TextBox Text="{Binding CaloricContentPer100Grams}"/>
+
+            <TextBlock Text="Масса продукта (г)"
+                           Margin="0 10 0 0"/>
+            <TextBox Text="{Binding WeightGrams}"/>
+
+            <TextBlock Text="Цена за 1 кг (руб.)"
+                           Margin="0 10 0 0"/>
+            <TextBox Text="{Binding PricePerKilogramRoubles}"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="1" Margin="0 10 0 0"
+                    HorizontalAlignment="Center">
+            <Button Content="Подтвердить"
+                    Command="{Binding SubmitCommand}">
+            </Button>
+            <Button Content="Отменить"
+                    Name="BtnCancel"
+                    Margin="20 0 0 0"
+                    Command="{Binding CancelCommand}"/>
+        </StackPanel>
+    </Grid>
+</Window>

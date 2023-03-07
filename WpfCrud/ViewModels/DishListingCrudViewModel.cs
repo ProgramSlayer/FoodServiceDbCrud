@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
@@ -43,59 +44,61 @@ namespace WpfCrud.ViewModels
 
         private async Task DeleteDishAsync()
         {
-            throw new NotImplementedException();
-            //if (SelectedDish is null)
-            //{
-            //    return;
-            //}
+            if (SelectedDish is null)
+            {
+                return;
+            }
 
-            //await _dishService.DeleteDishAsync(SelectedDish.Id);
-            //await LoadDishesAsync();
+            await _dishService.DeleteDishAsync(SelectedDish.Id);
+            await LoadDishesAsync();
+        }
+
+        private bool? EditDishWindowShowDialog(EditableDish dish, IEnumerable<DishType> dishTypes)
+        {
+            var editDishViewModel = new EditDishViewModel(dish, dishTypes);
+            var editDishWindow = new EditDishWindow(editDishViewModel);
+            var result = editDishWindow.ShowDialog();
+            return result;
         }
 
         private async Task EditDishAsync()
         {
-            throw new NotImplementedException();
-            //if (SelectedDish is null)
-            //{
-            //    return;
-            //}
+            if (SelectedDish is null)
+            {
+                return;
+            }
 
-            //var editDish = new Dish
-            //{
-            //    Id = SelectedDish.Id,
-            //    CaloricContentPer100Grams = SelectedDish.CaloricContentPer100Grams,
-            //    CookingTimeMinutes = SelectedDish.CookingTimeMinutes,
-            //    DishType = SelectedDish.DishType,
-            //    Image = SelectedDish.Image,
-            //    Name = SelectedDish.Name,
-            //    Recipe = SelectedDish.Recipe,
-            //    WeightGrams = SelectedDish.WeightGrams,
-            //};
+            var dishTypes = await _dishTypeService.GetDishTypesAsync();
 
-            //var dishTypes = await _dishTypeService.GetDishTypesAsync();
-            //var editableDishViewModel = new EditableDishViewModel(editDish, dishTypes);
-            //var result = _editEntityWindowDialogService.ShowDialog(editableDishViewModel);
-            //if (result != true)
-            //{
-            //    return;
-            //}
-            //await _dishService.UpdateDishAsync(editDish);
-            //await LoadDishesAsync();
+            var dish = new EditableDish(
+                SelectedDish.Id,
+                SelectedDish.Name,
+                new DishType(SelectedDish.DishTypeId, SelectedDish.DishTypeName),
+                SelectedDish.CookingTimeMinutes,
+                SelectedDish.WeightGrams,
+                SelectedDish.Recipe,
+                SelectedDish.Image);
+
+            var dialogResult = EditDishWindowShowDialog(dish, dishTypes);
+            if (dialogResult != true)
+            {
+                return;
+            }
+
+            await _dishService.UpdateDishAsync(dish);
+            await LoadDishesAsync();
         }
         private async Task AddDishAsync()
         {
-            throw new NotImplementedException();
-            //var dishTypes = await _dishTypeService.GetDishTypesAsync();
-            //var editDish = new Dish();
-            //var editableDishViewModel = new EditableDishViewModel(editDish, dishTypes);
-            //var result = _editEntityWindowDialogService.ShowDialog(editableDishViewModel);
-            //if (result != true)
-            //{
-            //    return;
-            //}
-            //_ = await _dishService.AddDishAsync(editDish);
-            //await LoadDishesAsync();
+            var dishTypes = await _dishTypeService.GetDishTypesAsync();
+            var dish = new EditableDish();
+            var dialogResult = EditDishWindowShowDialog(dish, dishTypes);
+            if (dialogResult != true)
+            {
+                return;
+            }
+            _ = await _dishService.AddDishAsync(dish);
+            await LoadDishesAsync();
         }
 
         private async Task LoadDishesAsync()

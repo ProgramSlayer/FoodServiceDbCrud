@@ -37,10 +37,14 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id блюда"
                                     Binding="{Binding DishId}"/>
-                <DataGridTextColumn Header="Наименование блюда"
+                <DataGridTextColumn Header="Блюдо"
                                     Binding="{Binding DishName}"/>
+                <DataGridTextColumn Header="Тип блюда"
+                                    Binding="{Binding DishTypeName}"/>
                 <DataGridTextColumn Header="Id продукта"
                                     Binding="{Binding ProductId}"/>
+                <DataGridTextColumn Header="Продукт"
+                                    Binding="{Binding ProductName}"/>
                 <DataGridTextColumn Header="Требуемая масса продукта (г)"
                                     Binding="{Binding RequiredWeightGrams}"/>
             </DataGrid.Columns>

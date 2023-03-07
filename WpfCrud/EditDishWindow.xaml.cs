@@ -1,27 +1,46 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using WpfCrud.ViewModels;
 
 namespace WpfCrud
 {
-    /// <summary>
-    /// Логика взаимодействия для EditDishWindow.xaml
-    /// </summary>
     public partial class EditDishWindow : Window
     {
-        public EditDishWindow()
+        private readonly EditDishViewModel _editDishViewModel;
+
+        public EditDishWindow(EditDishViewModel editDishViewModel)
         {
+            _editDishViewModel = editDishViewModel ?? throw new ArgumentNullException(nameof(editDishViewModel));
+            DataContext = _editDishViewModel;
+            _editDishViewModel.SubmitError += OnSubmitError;
+            _editDishViewModel.SubmitSuccess += OnSubmitSuccess;
+            _editDishViewModel.CancelSubmit += OnCancelSubmit;
             InitializeComponent();
         }
+
+        private void OnCancelSubmit()
+        {
+            DialogResult = false;
+            Close();
+        }
+
+        private void OnSubmitSuccess()
+        {
+            DialogResult = true;
+            Close();
+        }
+
+        private void OnSubmitError(Exception obj)
+        {
+            MessageBox.Show(obj.Message, obj.GetType().Name, MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            _editDishViewModel.SubmitError -= OnSubmitError;
+            _editDishViewModel.SubmitSuccess -= OnSubmitSuccess;
+            _editDishViewModel.CancelSubmit -= OnCancelSubmit;
+        }
+
     }
 }
