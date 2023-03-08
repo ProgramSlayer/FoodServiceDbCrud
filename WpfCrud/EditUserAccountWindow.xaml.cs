@@ -1,27 +1,45 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using WpfCrud.ViewModels;
 
 namespace WpfCrud
 {
-    /// <summary>
-    /// Логика взаимодействия для EditUserAccountWindow.xaml
-    /// </summary>
     public partial class EditUserAccountWindow : Window
     {
-        public EditUserAccountWindow()
+        private readonly EditUserAccountViewModel _editUserAccountViewModel;
+
+        public EditUserAccountWindow(EditUserAccountViewModel editUserAccountViewModel)
         {
+            _editUserAccountViewModel = editUserAccountViewModel ?? throw new ArgumentNullException(nameof(editUserAccountViewModel));
+            DataContext = _editUserAccountViewModel;
+            _editUserAccountViewModel.SubmitError += OnSubmitError;
+            _editUserAccountViewModel.SubmitSuccess += OnSubmitSuccess;
+            _editUserAccountViewModel.CancelSubmit += OnCancelSubmit;
             InitializeComponent();
+        }
+
+        private void OnCancelSubmit()
+        {
+            DialogResult = false;
+            Close();
+        }
+
+        private void OnSubmitSuccess()
+        {
+            DialogResult = true;
+            Close();
+        }
+
+        private void OnSubmitError(Exception e)
+        {
+            MessageBox.Show(e.Message, e.GetType().Name, MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            _editUserAccountViewModel.SubmitError -= OnSubmitError;
+            _editUserAccountViewModel.SubmitSuccess -= OnSubmitSuccess;
+            _editUserAccountViewModel.CancelSubmit -= OnCancelSubmit;
         }
     }
 }

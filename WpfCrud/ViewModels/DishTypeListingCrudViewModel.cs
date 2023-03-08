@@ -5,7 +5,6 @@ using System.Windows;
 using System.Windows.Input;
 using WpfCrud.Commands;
 using WpfCrud.Models;
-using WpfCrud.Services;
 using WpfCrud.Services.DishTypes;
 
 namespace WpfCrud.ViewModels
@@ -59,41 +58,47 @@ namespace WpfCrud.ViewModels
             await LoadDishTypesAsync();
         }
 
+        private bool? EditDishTypeWindowShowDialog(DishType dishType)
+        {
+            var editDishTypeViewModel = new EditDishTypeViewModel(dishType);
+            var editDishTypeWindow = new EditDishTypeWindow(editDishTypeViewModel);
+            var result = editDishTypeWindow.ShowDialog();
+            return result;
+        }
+
         private async Task EditDishTypeAsync()
         {
-            throw new NotImplementedException();
-            //if (SelectedDishType is null)
-            //{
-            //    return;
-            //}
+            if (SelectedDishType is null)
+            {
+                return;
+            }
 
-            //var editDishType = new DishType
-            //{
-            //    Id = SelectedDishType.Id,
-            //    Name = SelectedDishType.Name,
-            //};
+            var dishType = new DishType
+            {
+                Id = SelectedDishType.Id,
+                Name = SelectedDishType.Name,
+            };
 
-            //var editableDishTypeViewModel = new EditableDishTypeViewModel(editDishType);
-            //var dialogResult = _editEntityWindowDialogService.ShowDialog(editableDishTypeViewModel);
-            //if (dialogResult != true)
-            //{
-            //    return;
-            //}
-            //await _dishTypeService.UpdateDishTypeAsync(editDishType);
+            var dialogResult = EditDishTypeWindowShowDialog(dishType);
+            if (dialogResult != true)
+            {
+                return;
+            }
+
+            await _dishTypeService.UpdateDishTypeAsync(dishType);
+            await LoadDishTypesAsync();
         }
 
         private async Task AddDishTypeAsync()
         {
-            throw new NotImplementedException();
-            //var editDishType = new DishType();
-            //var editableDishTypeViewModel = new EditableDishTypeViewModel(editDishType);
-            //var dialogResult = _editEntityWindowDialogService.ShowDialog(editableDishTypeViewModel);
-            //if (dialogResult != true)
-            //{
-            //    return;
-            //}
-            //_ = await _dishTypeService.AddDishTypeAsync(editDishType);
-            //await LoadDishTypesAsync();
+            var dishType = new DishType();
+            var dialogResult = EditDishTypeWindowShowDialog(dishType);
+            if (dialogResult != true)
+            {
+                return;
+            }
+            _ = await _dishTypeService.AddDishTypeAsync(dishType);
+            await LoadDishTypesAsync();
         }
 
         private void HandleException(Exception e)

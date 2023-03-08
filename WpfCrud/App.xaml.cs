@@ -15,10 +15,10 @@ namespace WpfCrud
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            var mainWindow = new MainWindow(new MainViewModel(new AdminViewModel()));
-            mainWindow.Show();
-            //var loginWindow = new LoginWindow(new LoginViewModel());
-            //loginWindow.Show();
+            //var mainWindow = new MainWindow(new MainViewModel(new AdminViewModel()));
+            //mainWindow.Show();
+            var loginWindow = new LoginWindow(new LoginViewModel());
+            loginWindow.Show();
         }
     }
 }

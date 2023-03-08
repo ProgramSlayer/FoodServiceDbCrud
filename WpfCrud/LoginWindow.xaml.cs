@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using WpfCrud.Models;
 using WpfCrud.ViewModels;
 
 namespace WpfCrud
@@ -30,7 +31,13 @@ namespace WpfCrud
             switch (_loginViewModel.CurrentUserRole)
             {
                 case Models.Enums.UserRoleEnum.Admin:
-                    ShowMainWindow(new AdminViewModel());
+                    var currentUser = new CurrentUser
+                    {
+                        Id = _loginViewModel.CurrentUserId,
+                        Login = _loginViewModel.Login,
+                        Role = _loginViewModel.CurrentUserRole,
+                    };
+                    ShowMainWindow(new AdminViewModel(currentUser));
                     break;
                 case Models.Enums.UserRoleEnum.Chef:
                     ShowMainWindow(new ChefViewModel());

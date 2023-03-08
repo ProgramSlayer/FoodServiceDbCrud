@@ -94,6 +94,9 @@
     <Compile Include="EditDishCookingWindow.xaml.cs">
       <DependentUpon>EditDishCookingWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EditDishTypeWindow.xaml.cs">
+      <DependentUpon>EditDishTypeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditDishWindow.xaml.cs">
       <DependentUpon>EditDishWindow.xaml</DependentUpon>
     </Compile>
@@ -108,6 +111,7 @@
     </Compile>
     <Compile Include="Models\EditableDishCooking.cs" />
     <Compile Include="Models\EditableDishIngredient.cs" />
+    <Compile Include="Models\EditableUserAccount.cs" />
     <Compile Include="Models\ViewDish.cs" />
     <Compile Include="Models\DishType.cs" />
     <Compile Include="Models\EditableDish.cs" />
@@ -115,12 +119,14 @@
     <Compile Include="Models\ViewDishCooking.cs" />
     <Compile Include="Models\ViewDishIngredient.cs" />
     <Compile Include="Models\ViewProduct.cs" />
+    <Compile Include="Models\ViewUserAccount.cs" />
     <Compile Include="Services\Authorization\AuthorizationService.cs" />
     <Compile Include="Services\DishCookings\DishCookingService.cs" />
     <Compile Include="Services\Dishes\DishService.cs" />
     <Compile Include="Services\DishIngredients\DishIngredientService.cs" />
     <Compile Include="Services\DishTypes\DishTypeService.cs" />
     <Compile Include="Services\Products\ProductService.cs" />
+    <Compile Include="Services\UserAccounts\UserAccountService.cs" />
     <Compile Include="ViewModels\ChefViewModel.cs" />
     <Compile Include="Commands\AsyncCommandBase.cs" />
     <Compile Include="Commands\AsyncDelegateCommand.cs" />
@@ -151,12 +157,13 @@
     <Compile Include="ViewModels\DishIngredientListingCrudViewModel.cs" />
     <Compile Include="ViewModels\DishListingCrudViewModel.cs" />
     <Compile Include="ViewModels\DishTypeListingCrudViewModel.cs" />
-    <Compile Include="ViewModels\EditableUserAccountViewModel.cs" />
     <Compile Include="ViewModels\EditDishCookingViewModel.cs" />
     <Compile Include="ViewModels\EditDishIngredientViewModel.cs" />
+    <Compile Include="ViewModels\EditDishTypeViewModel.cs" />
     <Compile Include="ViewModels\EditDishViewModel.cs" />
     <Compile Include="ViewModels\EditExistingDishIngredientViewModel.cs" />
     <Compile Include="ViewModels\EditProductViewModel.cs" />
+    <Compile Include="ViewModels\EditUserAccountViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ProductListingCrudViewModel.cs" />
@@ -195,6 +202,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EditDishCookingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditDishTypeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

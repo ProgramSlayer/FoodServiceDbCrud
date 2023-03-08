@@ -18,13 +18,13 @@
             <Button Content="Загрузить"
                     Command="{Binding LoadUserAccountsCommand}"/>
             <Button Content="Добавить"
-                    Command="{Binding AddUserCommand}"
+                    Command="{Binding AddUserAccountCommand}"
                     Margin="20 0 0 0"/>
             <Button Content="Изменить"
-                    Command="{Binding EditUserCommand}"
+                    Command="{Binding EditUserAccountCommand}"
                     Margin="20 0 0 0"/>
             <Button Content="Удалить"
-                    Command="{Binding DeleteUserCommand}"
+                    Command="{Binding DeleteUserAccountCommand}"
                     Margin="20 0 0 0"/>
         </StackPanel>
 

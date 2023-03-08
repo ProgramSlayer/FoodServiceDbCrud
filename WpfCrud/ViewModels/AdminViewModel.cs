@@ -1,16 +1,26 @@
-﻿namespace WpfCrud.ViewModels
+﻿using WpfCrud.Models;
+
+namespace WpfCrud.ViewModels
 {
     public class AdminViewModel : ViewModelBase
     {
-        private readonly ProductListingCrudViewModel _productListingCrudViewModel = new ProductListingCrudViewModel();
-        private readonly DishTypeListingCrudViewModel _dishTypeListingCrudViewModel = new DishTypeListingCrudViewModel();
-        private readonly DishCookingListingCrudViewModel _dishCookingListingCrudViewModel = new DishCookingListingCrudViewModel();
-        private readonly DishIngredientListingCrudViewModel _dishIngredientListingCrudViewModel = new DishIngredientListingCrudViewModel();
-        private readonly DishListingCrudViewModel _dishListingCrudViewModel = new DishListingCrudViewModel();
-        private readonly UserAccountListingCrudViewModel _userAccountListingCrudViewModel = new UserAccountListingCrudViewModel();
+        private readonly CurrentUser _currentUser;
+        private readonly UserAccountListingCrudViewModel _userAccountListingCrudViewModel;
+        private readonly ProductListingCrudViewModel _productListingCrudViewModel;
+        private readonly DishTypeListingCrudViewModel _dishTypeListingCrudViewModel;
+        private readonly DishCookingListingCrudViewModel _dishCookingListingCrudViewModel;
+        private readonly DishIngredientListingCrudViewModel _dishIngredientListingCrudViewModel;
+        private readonly DishListingCrudViewModel _dishListingCrudViewModel;
 
-        public AdminViewModel()
+        public AdminViewModel(CurrentUser currentUser)
         {
+            _currentUser = currentUser ?? throw new System.ArgumentNullException(nameof(currentUser));
+            _userAccountListingCrudViewModel = new UserAccountListingCrudViewModel(currentUser);
+            _productListingCrudViewModel = new ProductListingCrudViewModel();
+            _dishTypeListingCrudViewModel = new DishTypeListingCrudViewModel();
+            _dishCookingListingCrudViewModel = new DishCookingListingCrudViewModel();
+            _dishIngredientListingCrudViewModel = new DishIngredientListingCrudViewModel();
+            _dishListingCrudViewModel = new DishListingCrudViewModel();
         }
 
         public AdminViewModel(
