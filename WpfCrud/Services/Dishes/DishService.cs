@@ -44,6 +44,69 @@ namespace WpfCrud.Services.Dishes
             }
         }
 
+        public async Task<IEnumerable<DishWithIngredients>> GetDishesWithIngredientsAsync()
+        {
+            using (var context = _factory())
+            {
+                var dbDishesWithIngredients = await context
+                    .Dishes
+                    .Include(d => d.DishType)
+                    .Include(d => d.DishIngredients.Select(di => di.Product))
+                    .ToListAsync();
+                List<DishWithIngredients> results = ToDishesWithIngredients(dbDishesWithIngredients);
+                return results;
+            }
+        }
+
+        public async Task<IEnumerable<DishWithIngredients>> GetDishesWithIngredientsByDishNameAsync(string dishName)
+        {
+            if (string.IsNullOrWhiteSpace(dishName))
+            {
+                var result = await GetDishesWithIngredientsAsync();
+                return result;
+            }
+
+            using (var context = _factory())
+            {
+                var dbDishesWithIngredients = await context
+                    .Dishes
+                    .Where(d => d.Name.Contains(dishName))
+                    .Include(d => d.DishType)
+                    .Include(d => d.DishIngredients.Select(di => di.Product))
+                    .ToListAsync();
+                List<DishWithIngredients> results = ToDishesWithIngredients(dbDishesWithIngredients);
+                return results;
+            }
+        }
+
+        private static List<DishWithIngredients> ToDishesWithIngredients(List<DbDish> dbDishesWithIngredients)
+        {
+            var results = new List<DishWithIngredients>();
+            foreach (var dbDish in dbDishesWithIngredients)
+            {
+                var ingredients = from di in dbDish.DishIngredients
+                                  select new ViewDishIngredient(
+                                      di.DishId,
+                                      dbDish.Name,
+                                      dbDish.DishType.Name,
+                                      di.Product.Id,
+                                      di.Product.Name,
+                                      di.RequiredWeightGrams);
+                var dishWithIngredients = new DishWithIngredients(
+                    dbDish.Id,
+                    dbDish.Name,
+                    new Models.DishType(dbDish.DishTypeId, dbDish.DishType.Name),
+                    dbDish.CookingTimeMinutes,
+                    dbDish.WeightGrams,
+                    dbDish.Recipe,
+                    dbDish.Image,
+                    ingredients);
+                results.Add(dishWithIngredients);
+            }
+
+            return results;
+        }
+
         public async Task<EditableDish> AddDishAsync(EditableDish dish)
         {
             if (dish is null)

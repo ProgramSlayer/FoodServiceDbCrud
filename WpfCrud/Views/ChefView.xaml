@@ -10,23 +10,33 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <TabControl>
         <TabItem Header="Продукты">
-            <views:ProductListingCrudView Margin="10"/>
+            <views:ProductListingCrudView 
+                Margin="10"
+                DataContext="{Binding ProductListingCrudViewModel}"/>
         </TabItem>
 
         <TabItem Header="Типы блюд">
-            <views:DishTypeListingCrudView Margin="10"/>
+            <views:DishTypeListingCrudView 
+                Margin="10"
+                DataContext="{Binding DishTypeListingCrudViewModel}"/>
         </TabItem>
 
         <TabItem Header="Блюда">
-            <views:DishListingCrudView Margin="10"/>
+            <views:DishListingCrudView 
+                Margin="10"
+                DataContext="{Binding DishListingCrudViewModel}"/>
         </TabItem>
 
         <TabItem Header="Ингредиенты блюд">
-            <views:DishIngredientListingCrudView Margin="10"/>
+            <views:DishIngredientListingCrudView 
+                Margin="10"
+                DataContext="{Binding DishIngredientListingCrudViewModel}"/>
         </TabItem>
 
         <TabItem Header="Приготовления">
-            <views:DishCookingListingCrudView Margin="10"/>
+            <views:DishCookingListingCrudView 
+                Margin="10"
+                DataContext="{Binding DishCookingListingCrudViewModel}"/>
         </TabItem>
     </TabControl>
 </UserControl>

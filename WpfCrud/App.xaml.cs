@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Windows;
-using WpfCrud.Models;
-using WpfCrud.Services;
+﻿using System.Windows;
 using WpfCrud.ViewModels;
 
 namespace WpfCrud
@@ -15,8 +12,6 @@ namespace WpfCrud
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            //var mainWindow = new MainWindow(new MainViewModel(new AdminViewModel()));
-            //mainWindow.Show();
             var loginWindow = new LoginWindow(new LoginViewModel());
             loginWindow.Show();
         }

@@ -37,6 +37,28 @@ namespace WpfCrud.Services.Products
             }
         }
 
+        public async Task<IEnumerable<ViewProduct>> GetViewProductsByNameAsync(string prodName)
+        {
+            if (string.IsNullOrWhiteSpace(prodName))
+            {
+                var allProducts = await GetViewProductsAsync();
+                return allProducts;
+            }
+
+            using (var context = _factory())
+            {
+                var dbProducts = await context.Products.Where(p => p.Name.Contains(prodName)).ToListAsync();
+                var products = from dbp in dbProducts
+                               select new ViewProduct(
+                                   dbp.Id,
+                                   dbp.Name,
+                                   dbp.CaloricContentPer100Grams,
+                                   dbp.WeightGrams,
+                                   dbp.PricePerKilogramRoubles);
+                return products;
+            }
+        }
+
         public async Task<EditableProduct> AddProductAsync(EditableProduct product)
         {
             if (product is null)

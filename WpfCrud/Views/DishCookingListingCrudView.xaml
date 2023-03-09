@@ -43,8 +43,9 @@
                                     Binding="{Binding DishName}"/>
                 <DataGridTextColumn Header="Количество"
                                     Binding="{Binding Count}"/>
-                <DataGridTextColumn Header="Время"
-                                    Binding="{Binding CookedAt}"/>
+                <DataGridTextColumn 
+                    Header="Время"
+                    Binding="{Binding CookedAt, StringFormat={}{0:dd.MM.yyyy hh:mm:ss}}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

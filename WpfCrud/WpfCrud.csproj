@@ -109,6 +109,7 @@
     <Compile Include="EditUserAccountWindow.xaml.cs">
       <DependentUpon>EditUserAccountWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\DishWithIngredients.cs" />
     <Compile Include="Models\EditableDishCooking.cs" />
     <Compile Include="Models\EditableDishIngredient.cs" />
     <Compile Include="Models\EditableUserAccount.cs" />
@@ -154,8 +155,10 @@
     <Compile Include="Models\Enums\UserRoleEnum.cs" />
     <Compile Include="ViewModels\AdminViewModel.cs" />
     <Compile Include="ViewModels\DishCookingListingCrudViewModel.cs" />
+    <Compile Include="ViewModels\DishCookingListingViewModel.cs" />
     <Compile Include="ViewModels\DishIngredientListingCrudViewModel.cs" />
     <Compile Include="ViewModels\DishListingCrudViewModel.cs" />
+    <Compile Include="ViewModels\DishListingViewModel.cs" />
     <Compile Include="ViewModels\DishTypeListingCrudViewModel.cs" />
     <Compile Include="ViewModels\EditDishCookingViewModel.cs" />
     <Compile Include="ViewModels\EditDishIngredientViewModel.cs" />
@@ -167,6 +170,7 @@
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ProductListingCrudViewModel.cs" />
+    <Compile Include="ViewModels\ProductListingViewModel.cs" />
     <Compile Include="ViewModels\UserAccountListingCrudViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\AdminView.xaml.cs">

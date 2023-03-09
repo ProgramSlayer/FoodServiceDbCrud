@@ -51,6 +51,43 @@ namespace WpfCrud.Services.DishCookings
             }
         }
 
+        public async Task<IEnumerable<ViewDishCooking>> GetViewDishCookingsByDishNameAsync(string dishName)
+        {
+            if (string.IsNullOrWhiteSpace(dishName))
+            {
+                var results = await GetViewDishCookingsAsync();
+                return results;
+            }
+
+            using (var context = _factory())
+            {
+                var dbResults = await (
+                    from dc in context.DishCookings
+                    join d in context.Dishes on dc.DishId equals d.Id
+                    join dt in context.DishTypes on d.DishTypeId equals dt.Id
+                    where d.Name.Contains(dishName)
+                    select new
+                    {
+                        DishCookingId = dc.Id,
+                        DishId = d.Id,
+                        DishName = d.Name,
+                        DishTypeName = dt.Name,
+                        dc.Count,
+                        dc.CookedAt,
+                    }).ToListAsync();
+
+                var results = from i in dbResults
+                              select new ViewDishCooking(
+                                  i.DishCookingId,
+                                  i.DishId,
+                                  i.DishName,
+                                  i.DishTypeName,
+                                  i.Count,
+                                  i.CookedAt);
+                return results;
+            }
+        }
+
         public async Task<EditableDishCooking> AddDishCookingAsync(EditableDishCooking dc)
         {
             if (dc is null)
