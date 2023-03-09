@@ -10,19 +10,60 @@
 namespace WpfCrud.DbModels
 {
     using System;
-    using System.Collections.Generic;
-    
+
+    /// <summary>
+    /// Представление блюда.
+    /// </summary>
     public partial class ViewDish
     {
+        /// <summary>
+        /// Идентификатор блюда.
+        /// </summary>
         public int DishId { get; set; }
+
+        /// <summary>
+        /// Наименование блюда.
+        /// </summary>
         public string DishName { get; set; }
+
+        /// <summary>
+        /// Тип блюда.
+        /// </summary>
         public string DishTypeName { get; set; }
+
+        /// <summary>
+        /// Время готовки блюда (минут).
+        /// </summary>
         public double DishCookingTimeMinutes { get; set; }
+        
+        /// <summary>
+        /// Масса готового блюда (г).
+        /// </summary>
         public double DishWeightGrams { get; set; }
+
+        /// <summary>
+        /// Калорийность блюда (ккал / 100 г).
+        /// </summary>
         public Nullable<double> DishCaloricContentPer100Grams { get; set; }
+
+        /// <summary>
+        /// Суммарная стоимость ингредиентов блюда (руб.).
+        /// </summary>
         public Nullable<double> DishPriceRoubles { get; set; }
+
+        /// <summary>
+        /// Рецепт.
+        /// </summary>
         public string DishRecipe { get; set; }
+
+        /// <summary>
+        /// Изображение.
+        /// </summary>
         public byte[] DishImage { get; set; }
+
+        /// <summary>
+        /// Идентификатор типа блюда.
+        /// </summary>
         public int DishTypeId { get; set; }
     }
 }

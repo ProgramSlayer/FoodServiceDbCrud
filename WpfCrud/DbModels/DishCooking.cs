@@ -9,16 +9,34 @@
 
 namespace WpfCrud.DbModels
 {
-    using System;
-    using System.Collections.Generic;
-    
+    /// <summary>
+    /// Приготовление блюда.
+    /// </summary>
     public partial class DishCooking
     {
+        /// <summary>
+        /// Идентификатор.
+        /// </summary>
         public int Id { get; set; }
+        
+        /// <summary>
+        /// Идентификатор блюда.
+        /// </summary>
         public int DishId { get; set; }
+        
+        /// <summary>
+        /// Количество блюд.
+        /// </summary>
         public int Count { get; set; }
+        
+        /// <summary>
+        /// Время приготовления.
+        /// </summary>
         public System.DateTime CookedAt { get; set; }
     
+        /// <summary>
+        /// Блюдо.
+        /// </summary>
         public virtual Dish Dish { get; set; }
     }
 }

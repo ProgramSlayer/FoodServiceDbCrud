@@ -8,19 +8,24 @@ using WpfCrud.Models;
 
 namespace WpfCrud.Services.DishCookings
 {
+    /// <summary>
+    /// Сервис для работы с приготовлениями блюд.
+    /// </summary>
     public class DishCookingService
     {
+        /// <summary>
+        /// Фабрика по производству контекста.
+        /// </summary>
         private readonly Func<FoodServiceDbContext> _factory = () => new FoodServiceDbContext();
 
         public DishCookingService()
         {
         }
 
-        public DishCookingService(Func<FoodServiceDbContext> factory)
-        {
-            _factory = factory ?? throw new ArgumentNullException(nameof(factory));
-        }
-
+        /// <summary>
+        /// Извлекает все приготовления блюд из БД и возвращает их.
+        /// </summary>
+        /// <returns>Список приготовлений блюд.</returns>
         public async Task<IEnumerable<ViewDishCooking>> GetViewDishCookingsAsync()
         {
             using (var context = _factory())
@@ -51,6 +56,11 @@ namespace WpfCrud.Services.DishCookings
             }
         }
 
+        /// <summary>
+        /// Возвращает все приготовления указанного блюда.
+        /// </summary>
+        /// <param name="dishName">Наименование блюда.</param>
+        /// <returns></returns>
         public async Task<IEnumerable<ViewDishCooking>> GetViewDishCookingsByDishNameAsync(string dishName)
         {
             if (string.IsNullOrWhiteSpace(dishName))
@@ -88,6 +98,12 @@ namespace WpfCrud.Services.DishCookings
             }
         }
 
+        /// <summary>
+        /// Добавляет приготовление в БД.
+        /// </summary>
+        /// <param name="dc"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public async Task<EditableDishCooking> AddDishCookingAsync(EditableDishCooking dc)
         {
             if (dc is null)

@@ -9,9 +9,11 @@
 
 namespace WpfCrud.DbModels
 {
-    using System;
     using System.Collections.Generic;
-    
+
+    /// <summary>
+    /// Продукт.
+    /// </summary>
     public partial class Product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,12 +22,34 @@ namespace WpfCrud.DbModels
             this.DishIngredients = new HashSet<DishIngredient>();
         }
     
+        /// <summary>
+        /// Идентификатор.
+        /// </summary>
         public int Id { get; set; }
+        
+        /// <summary>
+        /// Наименование.
+        /// </summary>
         public string Name { get; set; }
+        
+        /// <summary>
+        /// Калорийность (ккал / 100 г).
+        /// </summary>
         public double CaloricContentPer100Grams { get; set; }
+        
+        /// <summary>
+        /// Масса (г).
+        /// </summary>
         public double WeightGrams { get; set; }
+        
+        /// <summary>
+        /// Цена за 1 кг (руб.).
+        /// </summary>
         public decimal PricePerKilogramRoubles { get; set; }
     
+        /// <summary>
+        /// Ингредиенты блюд.
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DishIngredient> DishIngredients { get; set; }
     }

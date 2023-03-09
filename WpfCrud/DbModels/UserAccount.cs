@@ -9,17 +9,39 @@
 
 namespace WpfCrud.DbModels
 {
-    using System;
-    using System.Collections.Generic;
-    
+    /// <summary>
+    /// Учётная запись пользователя системы.
+    /// </summary>
     public partial class UserAccount
     {
+        /// <summary>
+        /// Идентификатор.
+        /// </summary>
         public int Id { get; set; }
+        
+        /// <summary>
+        /// Идентификатор роли пользователя.
+        /// </summary>
         public int UserRoleId { get; set; }
+        
+        /// <summary>
+        /// Имя (логин) пользователя.
+        /// </summary>
         public string Login { get; set; }
+
+        /// <summary>
+        /// Пароль.
+        /// </summary>
         public byte[] Password { get; set; }
+
+        /// <summary>
+        /// Изображение.
+        /// </summary>
         public byte[] Image { get; set; }
     
+        /// <summary>
+        /// Роль пользователя.
+        /// </summary>
         public virtual UserRole UserRole { get; set; }
     }
 }

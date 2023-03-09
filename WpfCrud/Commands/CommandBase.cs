@@ -3,6 +3,9 @@ using System.Windows.Input;
 
 namespace WpfCrud.Commands
 {
+    /// <summary>
+    /// Абстрактная реализация интерфейса <see cref="ICommand"/>.
+    /// </summary>
     public abstract class CommandBase : ICommand
     {
         public event EventHandler CanExecuteChanged;
@@ -14,6 +17,9 @@ namespace WpfCrud.Commands
 
         public abstract void Execute(object parameter);
 
+        /// <summary>
+        /// Вызывает событие <see cref="CanExecuteChanged"/>.
+        /// </summary>
         protected void OnCanExecuteChanged() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);   
     }
 }
