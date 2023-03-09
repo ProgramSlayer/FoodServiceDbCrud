@@ -121,7 +121,6 @@
     <Compile Include="Models\ViewDishIngredient.cs" />
     <Compile Include="Models\ViewProduct.cs" />
     <Compile Include="Models\ViewUserAccount.cs" />
-    <Compile Include="Services\Authorization\AuthorizationService.cs" />
     <Compile Include="Services\DishCookings\DishCookingService.cs" />
     <Compile Include="Services\Dishes\DishService.cs" />
     <Compile Include="Services\DishIngredients\DishIngredientService.cs" />

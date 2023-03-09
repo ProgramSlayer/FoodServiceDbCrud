@@ -88,7 +88,7 @@ namespace WpfCrud.ViewModels
         {
             if (string.IsNullOrWhiteSpace(Name))
             {
-                throw new Exception("Название блюдо должно быть заполнено!");
+                throw new Exception("Название блюда должно быть заполнено!");
             }
 
             if (DishType is null)
