@@ -64,12 +64,12 @@ namespace WpfCrud.ViewModels
             Image = imageData;
         }
 
-        private void Cancel(object obj)
+        public void Cancel(object obj)
         {
             OnCancelSubmit();
         }
 
-        private void Submit(object obj)
+        public void Submit(object obj)
         {
             try
             {
@@ -84,7 +84,7 @@ namespace WpfCrud.ViewModels
             OnSubmitSuccess();
         }
 
-        private void ValidateProperties()
+        public void ValidateProperties()
         {
             if (string.IsNullOrWhiteSpace(Name))
             {
