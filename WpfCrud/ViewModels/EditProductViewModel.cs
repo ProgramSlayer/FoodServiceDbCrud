@@ -16,12 +16,12 @@ namespace WpfCrud.ViewModels
             CancelCommand = new DelegateCommand(Cancel);
         }
 
-        private void Cancel(object obj)
+        public void Cancel(object obj)
         {
             OnCancelSubmit();
         }
 
-        private void Submit(object obj)
+        public void Submit(object obj)
         {
             try
             {
@@ -35,7 +35,7 @@ namespace WpfCrud.ViewModels
             OnSubmitSucces();
         }
 
-        private void ValidateProperties()
+        public void ValidateProperties()
         {
             if (string.IsNullOrWhiteSpace(Name))
             {
