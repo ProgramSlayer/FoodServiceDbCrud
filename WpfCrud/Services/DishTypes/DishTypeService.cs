@@ -29,6 +29,7 @@ namespace WpfCrud.Services.DishTypes
                 var dbDishTypes = await context.DishTypes.ToListAsync();
                 var dishTypes = 
                     from dbDt in dbDishTypes
+                    orderby dbDt.Id
                     select new DishType
                     {
                         Id = dbDt.Id,
