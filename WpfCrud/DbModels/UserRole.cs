@@ -9,11 +9,9 @@
 
 namespace WpfCrud.DbModels
 {
+    using System;
     using System.Collections.Generic;
-
-    /// <summary>
-    /// Роль пользователя.
-    /// </summary>
+    
     public partial class UserRole
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,19 +20,9 @@ namespace WpfCrud.DbModels
             this.UserAccounts = new HashSet<UserAccount>();
         }
     
-        /// <summary>
-        /// Идентификатор.
-        /// </summary>
         public int Id { get; set; }
-
-        /// <summary>
-        /// Название.
-        /// </summary>
         public string Name { get; set; }
     
-        /// <summary>
-        /// Учётные записи пользователей с этой ролью.
-        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserAccount> UserAccounts { get; set; }
     }

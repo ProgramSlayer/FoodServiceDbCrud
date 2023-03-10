@@ -9,11 +9,9 @@
 
 namespace WpfCrud.DbModels
 {
+    using System;
     using System.Collections.Generic;
-
-    /// <summary>
-    /// Блюдо
-    /// </summary>
+    
     public partial class Dish
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,55 +21,17 @@ namespace WpfCrud.DbModels
             this.DishIngredients = new HashSet<DishIngredient>();
         }
     
-        /// <summary>
-        /// Идентификатор.
-        /// </summary>
         public int Id { get; set; }
-        
-        /// <summary>
-        /// Наименование.
-        /// </summary>
         public string Name { get; set; }
-        
-        /// <summary>
-        /// Идентификатор типа блюда.
-        /// </summary>
         public int DishTypeId { get; set; }
-        
-        /// <summary>
-        /// Время готовки (минут).
-        /// </summary>
         public double CookingTimeMinutes { get; set; }
-        
-        /// <summary>
-        /// Масса готового блюда (г).
-        /// </summary>
         public double WeightGrams { get; set; }
-        
-        /// <summary>
-        /// Рецепт.
-        /// </summary>
         public string Recipe { get; set; }
-        
-        /// <summary>
-        /// Изображение.
-        /// </summary>
         public byte[] Image { get; set; }
     
-        /// <summary>
-        /// Тип блюда.
-        /// </summary>
         public virtual DishType DishType { get; set; }
-        
-        /// <summary>
-        /// Приготовления этого блюда.
-        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DishCooking> DishCookings { get; set; }
-        
-        /// <summary>
-        /// Ингредиенты этого блюда.
-        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DishIngredient> DishIngredients { get; set; }
     }

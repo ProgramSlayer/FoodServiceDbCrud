@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище FoodServiceDbModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище FoodServiceDbModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Dish">
           <Key>
             <PropertyRef Name="Id" />
@@ -70,7 +70,7 @@
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "FoodService.dbo.ViewDish" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+предупреждение 6002: В таблице или представлении "db_pisarets_419/3_foodservice.dbo.ViewDish" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
         <EntityType Name="ViewDish">
           <Key>
             <PropertyRef Name="DishId" />
@@ -92,7 +92,7 @@
           <Property Name="DishRecipe" Type="nvarchar(max)" Nullable="false" />
           <Property Name="DishImage" Type="varbinary(max)" />
         </EntityType>
-        <Association Name="FK__Dish__DishTypeId__4316F928">
+        <Association Name="FK__Dish__DishTypeId__4E53A1AA">
           <End Role="DishType" Type="Self.DishType" Multiplicity="1" />
           <End Role="Dish" Type="Self.Dish" Multiplicity="*" />
           <ReferentialConstraint>
@@ -104,7 +104,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DishCooki__DishI__4E88ABD4">
+        <Association Name="FK__DishCooki__DishI__57DD0BE4">
           <End Role="Dish" Type="Self.Dish" Multiplicity="1" />
           <End Role="DishCooking" Type="Self.DishCooking" Multiplicity="*" />
           <ReferentialConstraint>
@@ -116,7 +116,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DishIngre__DishI__48CFD27E">
+        <Association Name="FK__DishIngre__DishI__531856C7">
           <End Role="Dish" Type="Self.Dish" Multiplicity="1" />
           <End Role="DishIngredient" Type="Self.DishIngredient" Multiplicity="*" />
           <ReferentialConstraint>
@@ -128,7 +128,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DishIngre__Produ__49C3F6B7">
+        <Association Name="FK__DishIngre__Produ__540C7B00">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
           <End Role="DishIngredient" Type="Self.DishIngredient" Multiplicity="*" />
           <ReferentialConstraint>
@@ -140,7 +140,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__UserAccou__UserR__5812160E">
+        <Association Name="FK__UserAccou__UserR__41EDCAC5">
           <End Role="UserRole" Type="Self.UserRole" Multiplicity="1" />
           <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="*" />
           <ReferentialConstraint>
@@ -174,28 +174,29 @@
     [ViewDish].[DishImage] AS [DishImage]
     FROM [dbo].[ViewDish] AS [ViewDish]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK__Dish__DishTypeId__4316F928" Association="Self.FK__Dish__DishTypeId__4316F928">
+          <AssociationSet Name="FK__Dish__DishTypeId__4E53A1AA" Association="Self.FK__Dish__DishTypeId__4E53A1AA">
             <End Role="DishType" EntitySet="DishType" />
             <End Role="Dish" EntitySet="Dish" />
           </AssociationSet>
-          <AssociationSet Name="FK__DishCooki__DishI__4E88ABD4" Association="Self.FK__DishCooki__DishI__4E88ABD4">
+          <AssociationSet Name="FK__DishCooki__DishI__57DD0BE4" Association="Self.FK__DishCooki__DishI__57DD0BE4">
             <End Role="Dish" EntitySet="Dish" />
             <End Role="DishCooking" EntitySet="DishCooking" />
           </AssociationSet>
-          <AssociationSet Name="FK__DishIngre__DishI__48CFD27E" Association="Self.FK__DishIngre__DishI__48CFD27E">
+          <AssociationSet Name="FK__DishIngre__DishI__531856C7" Association="Self.FK__DishIngre__DishI__531856C7">
             <End Role="Dish" EntitySet="Dish" />
             <End Role="DishIngredient" EntitySet="DishIngredient" />
           </AssociationSet>
-          <AssociationSet Name="FK__DishIngre__Produ__49C3F6B7" Association="Self.FK__DishIngre__Produ__49C3F6B7">
+          <AssociationSet Name="FK__DishIngre__Produ__540C7B00" Association="Self.FK__DishIngre__Produ__540C7B00">
             <End Role="Product" EntitySet="Product" />
             <End Role="DishIngredient" EntitySet="DishIngredient" />
           </AssociationSet>
-          <AssociationSet Name="FK__UserAccou__UserR__5812160E" Association="Self.FK__UserAccou__UserR__5812160E">
+          <AssociationSet Name="FK__UserAccou__UserR__41EDCAC5" Association="Self.FK__UserAccou__UserR__41EDCAC5">
             <End Role="UserRole" EntitySet="UserRole" />
             <End Role="UserAccount" EntitySet="UserAccount" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FoodServiceDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -210,9 +211,9 @@
           <Property Name="WeightGrams" Type="Double" Nullable="false" />
           <Property Name="Recipe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="DishType" Relationship="Self.FK__Dish__DishTypeId__4316F928" FromRole="Dish" ToRole="DishType" />
-          <NavigationProperty Name="DishCookings" Relationship="Self.FK__DishCooki__DishI__4E88ABD4" FromRole="Dish" ToRole="DishCooking" />
-          <NavigationProperty Name="DishIngredients" Relationship="Self.FK__DishIngre__DishI__48CFD27E" FromRole="Dish" ToRole="DishIngredient" />
+          <NavigationProperty Name="DishType" Relationship="Self.FK__Dish__DishTypeId__4E53A1AA" FromRole="Dish" ToRole="DishType" />
+          <NavigationProperty Name="DishCookings" Relationship="Self.FK__DishCooki__DishI__57DD0BE4" FromRole="Dish" ToRole="DishCooking" />
+          <NavigationProperty Name="DishIngredients" Relationship="Self.FK__DishIngre__DishI__531856C7" FromRole="Dish" ToRole="DishIngredient" />
         </EntityType>
         <EntityType Name="DishCooking">
           <Key>
@@ -222,7 +223,7 @@
           <Property Name="DishId" Type="Int32" Nullable="false" />
           <Property Name="Count" Type="Int32" Nullable="false" />
           <Property Name="CookedAt" Type="DateTime" Nullable="false" Precision="7" />
-          <NavigationProperty Name="Dish" Relationship="Self.FK__DishCooki__DishI__4E88ABD4" FromRole="DishCooking" ToRole="Dish" />
+          <NavigationProperty Name="Dish" Relationship="Self.FK__DishCooki__DishI__57DD0BE4" FromRole="DishCooking" ToRole="Dish" />
         </EntityType>
         <EntityType Name="DishIngredient">
           <Key>
@@ -232,8 +233,8 @@
           <Property Name="DishId" Type="Int32" Nullable="false" />
           <Property Name="ProductId" Type="Int32" Nullable="false" />
           <Property Name="RequiredWeightGrams" Type="Double" Nullable="false" />
-          <NavigationProperty Name="Dish" Relationship="Self.FK__DishIngre__DishI__48CFD27E" FromRole="DishIngredient" ToRole="Dish" />
-          <NavigationProperty Name="Product" Relationship="Self.FK__DishIngre__Produ__49C3F6B7" FromRole="DishIngredient" ToRole="Product" />
+          <NavigationProperty Name="Dish" Relationship="Self.FK__DishIngre__DishI__531856C7" FromRole="DishIngredient" ToRole="Dish" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__DishIngre__Produ__540C7B00" FromRole="DishIngredient" ToRole="Product" />
         </EntityType>
         <EntityType Name="DishType">
           <Key>
@@ -241,7 +242,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Dishes" Relationship="Self.FK__Dish__DishTypeId__4316F928" FromRole="DishType" ToRole="Dish" />
+          <NavigationProperty Name="Dishes" Relationship="Self.FK__Dish__DishTypeId__4E53A1AA" FromRole="DishType" ToRole="Dish" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -252,7 +253,7 @@
           <Property Name="CaloricContentPer100Grams" Type="Double" Nullable="false" />
           <Property Name="WeightGrams" Type="Double" Nullable="false" />
           <Property Name="PricePerKilogramRoubles" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-          <NavigationProperty Name="DishIngredients" Relationship="Self.FK__DishIngre__Produ__49C3F6B7" FromRole="Product" ToRole="DishIngredient" />
+          <NavigationProperty Name="DishIngredients" Relationship="Self.FK__DishIngre__Produ__540C7B00" FromRole="Product" ToRole="DishIngredient" />
         </EntityType>
         <EntityType Name="UserAccount">
           <Key>
@@ -263,7 +264,7 @@
           <Property Name="Login" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="UserRole" Relationship="Self.FK__UserAccou__UserR__5812160E" FromRole="UserAccount" ToRole="UserRole" />
+          <NavigationProperty Name="UserRole" Relationship="Self.FK__UserAccou__UserR__41EDCAC5" FromRole="UserAccount" ToRole="UserRole" />
         </EntityType>
         <EntityType Name="UserRole">
           <Key>
@@ -271,9 +272,30 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="UserAccounts" Relationship="Self.FK__UserAccou__UserR__5812160E" FromRole="UserRole" ToRole="UserAccount" />
+          <NavigationProperty Name="UserAccounts" Relationship="Self.FK__UserAccou__UserR__41EDCAC5" FromRole="UserRole" ToRole="UserAccount" />
         </EntityType>
-        <Association Name="FK__Dish__DishTypeId__4316F928">
+        <EntityType Name="ViewDish">
+          <Key>
+            <PropertyRef Name="DishId" />
+            <PropertyRef Name="DishName" />
+            <PropertyRef Name="DishTypeId" />
+            <PropertyRef Name="DishTypeName" />
+            <PropertyRef Name="DishCookingTimeMinutes" />
+            <PropertyRef Name="DishWeightGrams" />
+            <PropertyRef Name="DishRecipe" />
+          </Key>
+          <Property Name="DishId" Type="Int32" Nullable="false" />
+          <Property Name="DishName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DishTypeId" Type="Int32" Nullable="false" />
+          <Property Name="DishTypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DishCookingTimeMinutes" Type="Double" Nullable="false" />
+          <Property Name="DishWeightGrams" Type="Double" Nullable="false" />
+          <Property Name="DishCaloricContentPer100Grams" Type="Double" />
+          <Property Name="DishPriceRoubles" Type="Double" />
+          <Property Name="DishRecipe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DishImage" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK__Dish__DishTypeId__4E53A1AA">
           <End Role="DishType" Type="Self.DishType" Multiplicity="1" />
           <End Role="Dish" Type="Self.Dish" Multiplicity="*" />
           <ReferentialConstraint>
@@ -285,7 +307,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DishCooki__DishI__4E88ABD4">
+        <Association Name="FK__DishCooki__DishI__57DD0BE4">
           <End Role="Dish" Type="Self.Dish" Multiplicity="1" />
           <End Role="DishCooking" Type="Self.DishCooking" Multiplicity="*" />
           <ReferentialConstraint>
@@ -297,7 +319,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DishIngre__DishI__48CFD27E">
+        <Association Name="FK__DishIngre__DishI__531856C7">
           <End Role="Dish" Type="Self.Dish" Multiplicity="1" />
           <End Role="DishIngredient" Type="Self.DishIngredient" Multiplicity="*" />
           <ReferentialConstraint>
@@ -309,7 +331,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DishIngre__Produ__49C3F6B7">
+        <Association Name="FK__DishIngre__Produ__540C7B00">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
           <End Role="DishIngredient" Type="Self.DishIngredient" Multiplicity="*" />
           <ReferentialConstraint>
@@ -321,7 +343,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__UserAccou__UserR__5812160E">
+        <Association Name="FK__UserAccou__UserR__41EDCAC5">
           <End Role="UserRole" Type="Self.UserRole" Multiplicity="1" />
           <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="*" />
           <ReferentialConstraint>
@@ -341,49 +363,28 @@
           <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="UserAccounts" EntityType="Self.UserAccount" />
           <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
-          <AssociationSet Name="FK__Dish__DishTypeId__4316F928" Association="Self.FK__Dish__DishTypeId__4316F928">
+          <EntitySet Name="ViewDishes" EntityType="Self.ViewDish" />
+          <AssociationSet Name="FK__Dish__DishTypeId__4E53A1AA" Association="Self.FK__Dish__DishTypeId__4E53A1AA">
             <End Role="DishType" EntitySet="DishTypes" />
             <End Role="Dish" EntitySet="Dishes" />
           </AssociationSet>
-          <AssociationSet Name="FK__DishCooki__DishI__4E88ABD4" Association="Self.FK__DishCooki__DishI__4E88ABD4">
+          <AssociationSet Name="FK__DishCooki__DishI__57DD0BE4" Association="Self.FK__DishCooki__DishI__57DD0BE4">
             <End Role="Dish" EntitySet="Dishes" />
             <End Role="DishCooking" EntitySet="DishCookings" />
           </AssociationSet>
-          <AssociationSet Name="FK__DishIngre__DishI__48CFD27E" Association="Self.FK__DishIngre__DishI__48CFD27E">
+          <AssociationSet Name="FK__DishIngre__DishI__531856C7" Association="Self.FK__DishIngre__DishI__531856C7">
             <End Role="Dish" EntitySet="Dishes" />
             <End Role="DishIngredient" EntitySet="DishIngredients" />
           </AssociationSet>
-          <AssociationSet Name="FK__DishIngre__Produ__49C3F6B7" Association="Self.FK__DishIngre__Produ__49C3F6B7">
+          <AssociationSet Name="FK__DishIngre__Produ__540C7B00" Association="Self.FK__DishIngre__Produ__540C7B00">
             <End Role="Product" EntitySet="Products" />
             <End Role="DishIngredient" EntitySet="DishIngredients" />
           </AssociationSet>
-          <AssociationSet Name="FK__UserAccou__UserR__5812160E" Association="Self.FK__UserAccou__UserR__5812160E">
+          <AssociationSet Name="FK__UserAccou__UserR__41EDCAC5" Association="Self.FK__UserAccou__UserR__41EDCAC5">
             <End Role="UserRole" EntitySet="UserRoles" />
             <End Role="UserAccount" EntitySet="UserAccounts" />
           </AssociationSet>
-          <EntitySet Name="ViewDishes" EntityType="FoodServiceDbModel.ViewDish" />
         </EntityContainer>
-        <EntityType Name="ViewDish">
-          <Key>
-            <PropertyRef Name="DishId" />
-            <PropertyRef Name="DishName" />
-            <PropertyRef Name="DishTypeName" />
-            <PropertyRef Name="DishCookingTimeMinutes" />
-            <PropertyRef Name="DishWeightGrams" />
-            <PropertyRef Name="DishRecipe" />
-            <PropertyRef Name="DishTypeId" />
-          </Key>
-          <Property Name="DishId" Type="Int32" Nullable="false" />
-          <Property Name="DishName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="DishTypeName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="DishCookingTimeMinutes" Type="Double" Nullable="false" />
-          <Property Name="DishWeightGrams" Type="Double" Nullable="false" />
-          <Property Name="DishCaloricContentPer100Grams" Type="Double" />
-          <Property Name="DishPriceRoubles" Type="Double" />
-          <Property Name="DishRecipe" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="DishImage" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="DishTypeId" Type="Int32" Nullable="false" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -463,16 +464,16 @@
           <EntitySetMapping Name="ViewDishes">
             <EntityTypeMapping TypeName="FoodServiceDbModel.ViewDish">
               <MappingFragment StoreEntitySet="ViewDish">
-                <ScalarProperty Name="DishTypeId" ColumnName="DishTypeId" />
-                <ScalarProperty Name="DishImage" ColumnName="DishImage" />
-                <ScalarProperty Name="DishRecipe" ColumnName="DishRecipe" />
-                <ScalarProperty Name="DishPriceRoubles" ColumnName="DishPriceRoubles" />
-                <ScalarProperty Name="DishCaloricContentPer100Grams" ColumnName="DishCaloricContentPer100Grams" />
-                <ScalarProperty Name="DishWeightGrams" ColumnName="DishWeightGrams" />
-                <ScalarProperty Name="DishCookingTimeMinutes" ColumnName="DishCookingTimeMinutes" />
-                <ScalarProperty Name="DishTypeName" ColumnName="DishTypeName" />
-                <ScalarProperty Name="DishName" ColumnName="DishName" />
                 <ScalarProperty Name="DishId" ColumnName="DishId" />
+                <ScalarProperty Name="DishName" ColumnName="DishName" />
+                <ScalarProperty Name="DishTypeId" ColumnName="DishTypeId" />
+                <ScalarProperty Name="DishTypeName" ColumnName="DishTypeName" />
+                <ScalarProperty Name="DishCookingTimeMinutes" ColumnName="DishCookingTimeMinutes" />
+                <ScalarProperty Name="DishWeightGrams" ColumnName="DishWeightGrams" />
+                <ScalarProperty Name="DishCaloricContentPer100Grams" ColumnName="DishCaloricContentPer100Grams" />
+                <ScalarProperty Name="DishPriceRoubles" ColumnName="DishPriceRoubles" />
+                <ScalarProperty Name="DishRecipe" ColumnName="DishRecipe" />
+                <ScalarProperty Name="DishImage" ColumnName="DishImage" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
