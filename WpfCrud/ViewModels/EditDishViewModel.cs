@@ -33,9 +33,9 @@ namespace WpfCrud.ViewModels
 
             _dish = dish;
             DishTypes = dishTypes;
-            if (DishType is null)
+            if (DishTypeId == 0)
             {
-                DishType = DishTypes.First();
+                DishTypeId = DishTypes.First().Id;
             }
             SubmitCommand = new DelegateCommand(Submit);
             CancelCommand = new DelegateCommand(Cancel);
@@ -91,7 +91,7 @@ namespace WpfCrud.ViewModels
                 throw new Exception("Название блюда должно быть заполнено!");
             }
 
-            if (DishType is null)
+            if (DishTypeId == 0)
             {
                 throw new Exception("Тип блюда должен быть выбран!");
             }
@@ -128,15 +128,25 @@ namespace WpfCrud.ViewModels
             }
         }
 
-        public DishType DishType
+        public int DishTypeId
         {
-            get => _dish.DishType;
+            get => _dish.DishTypeId;
             set
             {
-                _dish.DishType = value;
-                OnPropertyChanged(nameof(DishType));
+                _dish.DishTypeId = value;
+                OnPropertyChanged(nameof(DishTypeId));
             }
         }
+
+        //public DishType DishType
+        //{
+        //    get => _dish.DishType;
+        //    set
+        //    {
+        //        _dish.DishType = value;
+        //        OnPropertyChanged(nameof(DishType));
+        //    }
+        //}
 
         public double CookingTimeMinutes
         {

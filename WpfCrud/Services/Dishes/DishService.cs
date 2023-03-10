@@ -125,7 +125,7 @@ namespace WpfCrud.Services.Dishes
                 {
                     Name = dish.Name,
                     CookingTimeMinutes = dish.CookingTimeMinutes,
-                    DishTypeId = dish.DishType.Id,
+                    DishTypeId = dish.DishTypeId,
                     WeightGrams = dish.WeightGrams,
                     Image = dish.Image,
                     Recipe = dish.Recipe,
@@ -151,7 +151,7 @@ namespace WpfCrud.Services.Dishes
                     .SingleOrDefaultAsync(d => d.Id == dish.Id)
                     ?? throw new Exception($"Блюдо (Id = {dish.Id}) не найдено в базе данных!");
                 dbDish.Name = dish.Name;
-                dbDish.DishTypeId = dish.DishType.Id;
+                dbDish.DishTypeId = dish.DishTypeId;
                 dbDish.CookingTimeMinutes = dish.CookingTimeMinutes;
                 dbDish.WeightGrams = dish.WeightGrams;
                 dbDish.Recipe = dish.Recipe;

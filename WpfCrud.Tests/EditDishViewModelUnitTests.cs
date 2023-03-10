@@ -73,7 +73,7 @@ namespace WpfCrud.Tests
         }
 
         [TestMethod]
-        public void AssertValidatePropertiesThrowsWhenDishTypeIsNull()
+        public void AssertValidatePropertiesThrowsWhenDishTypeIsNotSet()
         {
             const string expectedErrorMessage = "Тип блюда должен быть выбран!";
             var et = new EditableDish();
@@ -84,7 +84,7 @@ namespace WpfCrud.Tests
 
             Exception e = null;
 
-            etvm.DishType = null;
+            etvm.DishTypeId = 0;
             e = Assert.ThrowsException<Exception>(validateCall);
             Assert.AreEqual(expectedErrorMessage, e.Message);
         }

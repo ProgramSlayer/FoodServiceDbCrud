@@ -73,7 +73,7 @@ namespace WpfCrud.ViewModels
             var dish = new EditableDish(
                 SelectedDish.Id,
                 SelectedDish.Name,
-                new DishType(SelectedDish.DishTypeId, SelectedDish.DishTypeName),
+                SelectedDish.DishTypeId,
                 SelectedDish.CookingTimeMinutes,
                 SelectedDish.WeightGrams,
                 SelectedDish.Recipe,
