@@ -64,6 +64,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddDishIngredientWindow.xaml.cs">
+      <DependentUpon>AddDishIngredientWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DbModels\Dish.cs">
       <DependentUpon>FoodServiceDbModel.tt</DependentUpon>
     </Compile>
@@ -76,6 +79,21 @@
     <Compile Include="DbModels\DishType.cs">
       <DependentUpon>FoodServiceDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DbModels\FoodServiceDbModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FoodServiceDbModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbModels\FoodServiceDbModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FoodServiceDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbModels\FoodServiceDbModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FoodServiceDbModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="DbModels\Product.cs">
       <DependentUpon>FoodServiceDbModel.tt</DependentUpon>
     </Compile>
@@ -87,9 +105,6 @@
     </Compile>
     <Compile Include="DbModels\ViewDish.cs">
       <DependentUpon>FoodServiceDbModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AddDishIngredientWindow.xaml.cs">
-      <DependentUpon>AddDishIngredientWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="EditDishCookingWindow.xaml.cs">
       <DependentUpon>EditDishCookingWindow.xaml</DependentUpon>
@@ -132,21 +147,6 @@
     <Compile Include="Commands\AsyncDelegateCommand.cs" />
     <Compile Include="Commands\CommandBase.cs" />
     <Compile Include="Commands\DelegateCommand.cs" />
-    <Compile Include="DbModels\FoodServiceDbModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FoodServiceDbModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DbModels\FoodServiceDbModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FoodServiceDbModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DbModels\FoodServiceDbModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FoodServiceDbModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
@@ -313,28 +313,31 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\UserImagePlaceholder.png" />
     <Resource Include="Images\Бухгалтер.jpeg" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\Captcha1337.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="DbModels\FoodServiceDbModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>FoodServiceDbModel.Context.cs</LastGenOutput>
       <DependentUpon>FoodServiceDbModel.edmx</DependentUpon>
+      <LastGenOutput>FoodServiceDbModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="DbModels\FoodServiceDbModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>FoodServiceDbModel.edmx</DependentUpon>
       <LastGenOutput>FoodServiceDbModel.cs</LastGenOutput>
     </Content>
-    <Resource Include="Images\Captcha1337.jpeg" />
   </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
