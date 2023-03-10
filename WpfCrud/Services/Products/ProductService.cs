@@ -115,6 +115,18 @@ namespace WpfCrud.Services.Products
             {
                 var dbProd = await context.Products.SingleOrDefaultAsync(p => p.Id == id)
                     ?? throw new Exception($"Продукт (Id = {id}) не найден в базе данных!");
+
+                var hasRelatedIngredients = await context
+                    .Entry(dbProd)
+                    .Collection(p => p.DishIngredients)
+                    .Query()
+                    .AnyAsync();
+
+                if (hasRelatedIngredients)
+                {
+                    throw new Exception($"Продукт (Id = {id}) используется в блюдах!");
+                }
+
                 context.Products.Remove(dbProd);
                 await context.SaveChangesAsync();
             }
