@@ -7,7 +7,7 @@
         xmlns:views="clr-namespace:WpfCrud.Views"
         d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
         mc:Ignorable="d"
-        Title="Главное окно" Height="450" Width="800">
+        Title="Главное окно" Height="600" Width="800">
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewmodels:AdminViewModel}">
             <views:AdminView/>
