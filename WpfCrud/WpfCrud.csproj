@@ -67,6 +67,7 @@
     <Compile Include="AddDishIngredientWindow.xaml.cs">
       <DependentUpon>AddDishIngredientWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\NullImageConverter.cs" />
     <Compile Include="DbModels\Dish.cs">
       <DependentUpon>FoodServiceDbModel.tt</DependentUpon>
     </Compile>
