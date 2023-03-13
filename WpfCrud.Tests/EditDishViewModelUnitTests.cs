@@ -20,7 +20,7 @@ namespace WpfCrud.Tests
         };
 
         [TestMethod]
-        public void AssertConstructorThrowWhenEditableDishParamIsNull()
+        public void AssertConstructorThrowsWhenEditableDishParamIsNull()
         {
             EditableDish editableDish = null;
             Assert
