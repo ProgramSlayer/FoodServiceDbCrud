@@ -10,6 +10,9 @@ using WpfCrud.Models;
 
 namespace WpfCrud.Services.Dishes
 {
+    /// <summary>
+    /// Сервис для работы с данными блюд в БД.
+    /// </summary>
     public class DishService
     {
         private readonly Func<FoodServiceDbContext> _factory = () => new FoodServiceDbContext();
@@ -18,11 +21,10 @@ namespace WpfCrud.Services.Dishes
         {
         }
 
-        public DishService(Func<FoodServiceDbContext> factory)
-        {
-            _factory = factory ?? throw new ArgumentNullException(nameof(factory));
-        }
-
+        /// <summary>
+        /// Возвращает список данных блюд из БД.
+        /// </summary>
+        /// <returns>Список данных блюд.</returns>
         public async Task<IEnumerable<ViewDish>> GetDishInfosAsync()
         {
             using (var context = _factory())
@@ -44,6 +46,10 @@ namespace WpfCrud.Services.Dishes
             }
         }
 
+        /// <summary>
+        /// Возвращает список данных блюд вместе с их ингредиентами.
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<DishWithIngredients>> GetDishesWithIngredientsAsync()
         {
             using (var context = _factory())
@@ -58,6 +64,11 @@ namespace WpfCrud.Services.Dishes
             }
         }
 
+        /// <summary>
+        /// Возвращает список блюд и их ингредиентов по названию блюда.
+        /// </summary>
+        /// <param name="dishName">Название блюда.</param>
+        /// <returns></returns>
         public async Task<IEnumerable<DishWithIngredients>> GetDishesWithIngredientsByDishNameAsync(string dishName)
         {
             if (string.IsNullOrWhiteSpace(dishName))
@@ -79,7 +90,12 @@ namespace WpfCrud.Services.Dishes
             }
         }
 
-        private static List<DishWithIngredients> ToDishesWithIngredients(List<DbDish> dbDishesWithIngredients)
+        /// <summary>
+        /// Преобразует коллекцию <see cref="DbDish"/> в коллекцию <see cref="DishWithIngredients"/>.
+        /// </summary>
+        /// <param name="dbDishesWithIngredients"></param>
+        /// <returns></returns>
+        private static List<DishWithIngredients> ToDishesWithIngredients(IEnumerable<DbDish> dbDishesWithIngredients)
         {
             var results = new List<DishWithIngredients>();
             foreach (var dbDish in dbDishesWithIngredients)
@@ -107,6 +123,13 @@ namespace WpfCrud.Services.Dishes
             return results;
         }
 
+        /// <summary>
+        /// Добавляет данные блюда в БД.
+        /// </summary>
+        /// <param name="dish">Блюдо.</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="Exception"></exception>
         public async Task<EditableDish> AddDishAsync(EditableDish dish)
         {
             if (dish is null)
@@ -137,6 +160,13 @@ namespace WpfCrud.Services.Dishes
             }
         }
 
+        /// <summary>
+        /// Обновляет данные блюда в БД.
+        /// </summary>
+        /// <param name="dish"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="Exception"></exception>
         public async Task UpdateDishAsync(EditableDish dish)
         {
             if (dish == null)
@@ -160,6 +190,12 @@ namespace WpfCrud.Services.Dishes
             }
         }
 
+        /// <summary>
+        /// Удаляет данные блюда из БД.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public async Task DeleteDishAsync(int id)
         {
             using (var context = _factory())

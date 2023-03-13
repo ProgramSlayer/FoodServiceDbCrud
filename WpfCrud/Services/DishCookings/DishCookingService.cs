@@ -60,7 +60,7 @@ namespace WpfCrud.Services.DishCookings
         /// Возвращает все приготовления указанного блюда.
         /// </summary>
         /// <param name="dishName">Наименование блюда.</param>
-        /// <returns></returns>
+        /// <returns>Список приготовлений указанного блюда.</returns>
         public async Task<IEnumerable<ViewDishCooking>> GetViewDishCookingsByDishNameAsync(string dishName)
         {
             if (string.IsNullOrWhiteSpace(dishName))
@@ -101,7 +101,7 @@ namespace WpfCrud.Services.DishCookings
         /// <summary>
         /// Добавляет приготовление в БД.
         /// </summary>
-        /// <param name="dc"></param>
+        /// <param name="dc">Приготовление.</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
         public async Task<EditableDishCooking> AddDishCookingAsync(EditableDishCooking dc)
@@ -126,6 +126,13 @@ namespace WpfCrud.Services.DishCookings
             }
         }
 
+        /// <summary>
+        /// Обновляет указанное приготовление в БД.
+        /// </summary>
+        /// <param name="dc">Приготовление.</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="Exception"></exception>
         public async Task UpdateDishCookingAsync(EditableDishCooking dc)
         {
             if (dc is null)
@@ -146,6 +153,12 @@ namespace WpfCrud.Services.DishCookings
             }
         }
 
+        /// <summary>
+        /// Удаляет указанное приготовление из БД.
+        /// </summary>
+        /// <param name="id">Идентификатор приготовления.</param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public async Task DeleteDishCookingAsync(int id)
         {
             using (var context = _factory())

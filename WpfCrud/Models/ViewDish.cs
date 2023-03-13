@@ -1,5 +1,8 @@
 ﻿namespace WpfCrud.Models
 {
+    /// <summary>
+    /// Информация о блюде (без ингредиентов).
+    /// </summary>
     public class ViewDish
     {
         public ViewDish(
@@ -26,15 +29,54 @@
             DishPriceRoubles = dishPriceRoubles;
         }
 
+        /// <summary>
+        /// Идентификатор.
+        /// </summary>
         public int Id { get; }
+
+        /// <summary>
+        /// Название.
+        /// </summary>
         public string Name { get; }
+
+        /// <summary>
+        /// Идентификатор типа блюда.
+        /// </summary>
         public int DishTypeId { get; }
+
+        /// <summary>
+        /// Название типа блюда.
+        /// </summary>
         public string DishTypeName { get; }
+
+        /// <summary>
+        /// Время готовки (минут).
+        /// </summary>
         public double CookingTimeMinutes { get; }
+
+        /// <summary>
+        /// Масса готового блюда (г).
+        /// </summary>
         public double WeightGrams { get; }
+
+        /// <summary>
+        /// Рецепт.
+        /// </summary>
         public string Recipe { get; }
+
+        /// <summary>
+        /// Изображение.
+        /// </summary>
         public byte[] Image { get; }
+
+        /// <summary>
+        /// Калорийность (ккал / 100 г) (на основе калорийности ингредиентов).
+        /// </summary>
         public double? CaloricContentPer100Grams { get; }
+
+        /// <summary>
+        /// Стоимость 1 ед. блюда (руб.).
+        /// </summary>
         public double? DishPriceRoubles { get; }
     }
 }
