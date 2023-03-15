@@ -1,14 +1,14 @@
 # FoodServiceDbCrud
 
-# Данные для входа
-# Админ
-# Логин: GigaAdmin
-# Пароль: giga_admin
+Login data
+Admin Role
+Login: GigaAdmin
+Password: giga_admin
 
-# Шеф-повар
-# Логин: MasterChef
-# Пароль: master_chef
+Chef Role
+Login: MasterChef
+Password: master_chef
 
-# Повар
-# Логин: Cook1
-# Пароль: cook_1
+Cook Role
+Login: Cook1
+Password: cook_1
